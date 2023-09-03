@@ -50,14 +50,18 @@ namespace SquashTheBugs
                  * 
                  * While this statement is sound, later this string is trying to be referenced but can't due to its location. I went in more detail near the bottom
                  * of this program, but I essentially moved this to be declared in the main instead of in this loop to fix this. */
-                
+
 
                 // output explanation of calculation
                 /* Console.Write(i + "/" + i - 1 + " = ");
                  * 
                  * this code results in a compiler error due to how the code is phrased. As it is, it attempts to add a number to a string and print it out
                  * due to the lack of parenthesis declaring that the "i-1" is supposed to be a seperate calculation from adding the i's to the string '"/"'.
-                 * This is relevant because while you can add ints to strings (thus appending it to the string), you can't subtract them */
+                 * This is relevant because while you can add ints to strings (thus appending it to the string), you can't subtract them 
+                 * !!!NOTE!!! I may be inccorect here but I'm susupicious this code would have not been caught in the compiler in VS2019. If
+                 * you happen to remember this note upon grading would you let me know? Thanks! */
+
+
 
                 Console.Write(i + "/" + (i - 1) + " = ");
 
