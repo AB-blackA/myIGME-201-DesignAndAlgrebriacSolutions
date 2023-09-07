@@ -30,7 +30,7 @@ namespace Mandelbrot
         /// </param>
 
 
-
+        //some variables declared here to be accessed in methods other than main
         static double realCoordUpper = 0;
         static double realCoordLower = 0;
         static double imagCoordUpper = 0;
@@ -40,9 +40,11 @@ namespace Mandelbrot
         static void Main(string[] args)
         {
 
+            //these will be used in calculating. basically they're holders for x and y values
             double imagCoord;
             double realCoord;
 
+            //determined constants for iterations in later loop
             const double ImagCoordIterations = 48;
             const double RealCoordIterations = 80;
 
@@ -52,11 +54,16 @@ namespace Mandelbrot
 
             GatherRealCoords();
 
+            double imagIncrements = GetIncrementVal(imagCoordLower, imagCoordUpper, ImagCoordIterations);
+            double realIncrements = GetIncrementVal(realCoordLower, realCoordUpper, RealCoordIterations);
+
+
+            //main program, slightly modified to use user input
             double realTemp, imagTemp, realTemp2, arg;
             int iterations;
-            for (imagCoord = imagCoordUpper; imagCoord >= imagCoordLower; imagCoord -= ((Math.Abs(imagCoordUpper) + Math.Abs(imagCoordLower)) / ImagCoordIterations))
+            for (imagCoord = imagCoordUpper; imagCoord >= imagCoordLower; imagCoord -= imagIncrements)
             {
-                for (realCoord = realCoordLower; realCoord <= realCoordUpper; realCoord += ((Math.Abs(realCoordUpper) + Math.Abs(realCoordLower)) / RealCoordIterations))
+                for (realCoord = realCoordLower; realCoord <= realCoordUpper; realCoord += realIncrements)
                 {
                     iterations = 0;
                     realTemp = realCoord;
@@ -92,6 +99,18 @@ namespace Mandelbrot
 
         }
 
+        //take three doubles: lower bound, upper bound, and iterations, and return the incremental value we want based off
+        //how many iterations are determined to be needed (iterations are constants)
+        private static double GetIncrementVal(double lower, double upper, double iterations)
+        {
+            if(lower < 0 && upper < 0){
+                return (Math.Abs(upper - lower) / iterations);
+            }else{
+                return (Math.Abs(lower - upper) / iterations);
+            }
+      }
+
+        //get the rool coordinates from the user
         private static void GatherRealCoords()
         {
             Console.WriteLine();
@@ -102,6 +121,7 @@ namespace Mandelbrot
             {
                 if (i == 1)
                 {
+                    //catch any attempts to not put in a double, and set back our loop counter to compensate
                     try
                     {
                         Console.WriteLine("What would you like your lower bound to be?");
@@ -117,11 +137,14 @@ namespace Mandelbrot
                 }
                 else
                 {
+                    //catch any attempts to not put in a double, and set back our loop counter to compensate
                     try
                     {
                         Console.WriteLine("What would you like your upper bound to be?");
                         realCoordUpper = Double.Parse(Console.ReadLine());
 
+                        //catch any attemps to put a lowerbound as greater then the higher, reject entry, then set back loop
+                        //to compensate
                         if (realCoordLower >= realCoordUpper)
                         {
                             Console.WriteLine();
@@ -149,6 +172,7 @@ namespace Mandelbrot
             {
                 if (i == 1)
                 {
+                    //catch any attempts to not put in a double, and set back our loop counter to compensate
                     try
                     {
                         Console.WriteLine("What would you like your upperbound to be?");
@@ -164,11 +188,14 @@ namespace Mandelbrot
                 }
                 else
                 {
+                    //catch any attempts to not put in a double, and set back our loop counter to compensate
                     try
                     {
                         Console.WriteLine("What would you like your lowerbound to be?");
                         imagCoordLower = Double.Parse(Console.ReadLine());
 
+                        //catch any attemps to put a lower bound as greater then the higher, reject entry, then set back loop
+                        //to compensate
                         if (imagCoordLower >= imagCoordUpper)
                         {
                             Console.WriteLine();
