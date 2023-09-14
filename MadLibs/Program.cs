@@ -11,7 +11,52 @@ namespace MadLibs
     {
         static void Main(string[] args)
         {
-            StreamReader fileReader = new StreamReader("");
+
+            string[] fileLines;
+            int storyOption;
+
+            StreamReader input = null;
+
+            try
+            {
+                input = new StreamReader("c:\\templates\\MadLibsTemplate.txt");
+
+
+                string nextLine; ;
+                int lineCount = 0;
+                while ((nextLine = input.ReadLine()) != null)
+                {
+
+                    lineCount++;
+                    Console.WriteLine(nextLine);
+                    Console.WriteLine();
+                }
+
+
+               /* fileLines = new string[lineCount];
+                storyOption = fileLines.Length;
+
+                for (int i = 0; i < nextLine.Length; i++)
+                {
+                    fileLines[i] = nextLine.Substring(i);
+                }
+
+                Console.WriteLine(fileLines[3]);*/
+
+            }
+            catch
+            {
+                Console.WriteLine(("Filepath not found, please ensure \"MadLibsTemplate.txt\" is in your \"c:\\\\templates\" directory "));
+            }
+
+            finally
+            {
+                if (input != null)
+                {
+                    input.Close();
+                }
+
+            }
         }
     }
 }
