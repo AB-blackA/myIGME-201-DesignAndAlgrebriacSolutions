@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*@author Andrew Black, original program by Karli Watson
- *@since unknown, starter code provided 9/7/23, modified by Andrew 9/7/23
+/*@author Andrew Black, original program by Karli Watson, @since unknown, starter code provided 9/7/23, modified by Andrew 9/7/23
  *@purpose: As part of an exercise I am taking code that uses the'Mandelbrot' application from Beginning C# and modifying it to allow
  *users to set their own limits for the images the application makes. In essence, using some complex math, this application makes
- *randomly generated images using characters by outputting them to the console via mathematics.*/
+ *randomly generated images using characters by outputting them to the console via mathematics.
+ *@limitations: requires a user to input numbers for us to make the program work*/
 
 namespace Mandelbrot
 {
@@ -111,6 +111,7 @@ namespace Mandelbrot
       }
 
         //get the rool coordinates from the user
+        //changes values of doubles pertaining to real numbers outside main header
         private static void GatherRealCoords()
         {
             Console.WriteLine();
@@ -163,6 +164,8 @@ namespace Mandelbrot
             }
         }
 
+        //get the imaginary coordinates from the user
+        //changes values of doubles pertaining to imaginary numbers outside main header
         private static void GatherImagCoords()
         {
             Console.WriteLine("Okay, first we need some imaginary coordinates from you. We need a upper then an lower bound. By default the values are 1.2 and -1.2. " +

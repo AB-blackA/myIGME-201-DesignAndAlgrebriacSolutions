@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*@author Andrew Black
- *@since 9/7/23
+/*@author Andrew Black @since 9/7/23
  *@purpose: logical exercise that asks user for two numbers and displays them, but asks for two new ones if both are
- *greater than 10 (individually)*/
+ *greater than 10 (individually)
+ *@limitations: requires user to input numbers*/
 
 namespace FlowControlLogicExercise
 {
@@ -27,12 +27,14 @@ namespace FlowControlLogicExercise
         }
 
         //read numbers to user
+        //no restrictions
         private static void ReadNumbers()
         {
             Console.WriteLine("Your numbers were: " + num1 + " and " +  num2);
         }
 
         //get numbers from user
+        //changes values of num1 and num2
         private static void GetNumbers()
         {
             bool reject = true;
@@ -87,6 +89,7 @@ namespace FlowControlLogicExercise
         }
 
         //describe to user the application function
+        //strings could probably be stored somewhere
         private static void ReadIntro()
         {
             Console.WriteLine("Hello, I would like two numbers from you. If you give me two numbers over the value of ten, I " +
