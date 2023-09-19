@@ -8,7 +8,7 @@ using System.Threading.Tasks;
  *@purpose: exercise program that accepts a string from a user and adds double quotes to every word in that string before returning it to the user
  *@limitations: requires user input to work
  */
-namespace PE8___Adding_Quotation_Marks_Exercise
+namespace PE8_QuotationAdder
 {
     internal class Program
     {
