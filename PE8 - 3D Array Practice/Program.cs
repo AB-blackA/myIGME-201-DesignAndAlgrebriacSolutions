@@ -7,7 +7,7 @@ using System.Threading.Tasks;
  *purpose: exercise that requested me to store the value of an equation in a 3d array. equations => z = 3y^2 + 2x - 1
  *limitations: self contained program so no limitations besides my own ability to understand how to use 3d arrays
  */
-namespace PE8___3D_Array_Practice
+namespace PE8_3DArrayPractice
 {
     internal class Program
     {
