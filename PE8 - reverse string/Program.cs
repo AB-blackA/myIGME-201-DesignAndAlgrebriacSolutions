@@ -9,7 +9,7 @@ using System.Threading.Tasks;
  *@purpose exercise program that gets user input for a string and reverses it
  *@limitations requires user input to work
  */
-namespace PE8___reverse_string
+namespace PE8_ReverseString
 {
     internal class Program
     {
