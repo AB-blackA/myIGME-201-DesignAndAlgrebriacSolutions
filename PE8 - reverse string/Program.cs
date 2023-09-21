@@ -11,7 +11,7 @@ using System.Threading.Tasks;
  */
 namespace PE8_ReverseString
 {
-    internal class Program
+    static class Program
     {
         /*@purpose: all of program takes place in main method. stores values, informs user of intent, gets user input, reverses and outputs that reverse of input
          *@limitations: requires user to work
