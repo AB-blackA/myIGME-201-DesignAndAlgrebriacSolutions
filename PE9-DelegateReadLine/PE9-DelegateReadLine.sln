@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PE9-DelegateReadLine", "PE9-DelegateReadLine.csproj", "{5FF93E66-BFAC-4556-B402-1B1963E67D7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FF93E66-BFAC-4556-B402-1B1963E67D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF93E66-BFAC-4556-B402-1B1963E67D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF93E66-BFAC-4556-B402-1B1963E67D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF93E66-BFAC-4556-B402-1B1963E67D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBD57A2C-C47F-49AB-AB30-F1588B3B8E71}
+	EndGlobalSection
+EndGlobal
