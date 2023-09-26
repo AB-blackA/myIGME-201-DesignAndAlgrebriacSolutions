@@ -11,7 +11,7 @@ using System.Threading.Tasks;
  */
 namespace PE8_ReplaceNoWithYes
 {
-    internal class Program
+    static class Program
     {
         /*@purpose: main class contains entire program. holds variables, explains program to user, accepts user input, moddifies that input, and outputs to user
          *@limitations: requires user input

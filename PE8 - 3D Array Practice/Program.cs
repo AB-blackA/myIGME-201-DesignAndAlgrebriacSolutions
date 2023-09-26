@@ -9,7 +9,7 @@ using System.Threading.Tasks;
  */
 namespace PE8_3DArrayPractice
 {
-    internal class Program
+    static class Program
     {
         static void Main(string[] args)
         {

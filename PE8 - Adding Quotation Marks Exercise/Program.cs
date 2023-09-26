@@ -10,7 +10,7 @@ using System.Threading.Tasks;
  */
 namespace PE8_QuotationAdder
 {
-    internal class Program
+    static class Program
     {
         /*purpose: main class does ever function. holds variables, writes to user, gathers user inputs, does processes on input, and prints to output
          *limitations: requires user input
