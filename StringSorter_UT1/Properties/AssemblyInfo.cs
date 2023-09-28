@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NumberSorter_UT1")]
+[assembly: AssemblyTitle("StringSorter_UT1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GCCIS IT")]
-[assembly: AssemblyProduct("NumberSorter_UT1")]
+[assembly: AssemblyProduct("StringSorter_UT1")]
 [assembly: AssemblyCopyright("Copyright © GCCIS IT 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("00661756-8818-4dd6-8965-2ae4329b21ae")]
+[assembly: Guid("91464956-3e28-4625-bade-68ecf507ff76")]
 
 // Version information for an assembly consists of the following four values:
 //

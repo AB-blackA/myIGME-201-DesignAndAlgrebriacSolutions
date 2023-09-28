@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00661756-8818-4DD6-8965-2AE4329B21AE}</ProjectGuid>
+    <ProjectGuid>{91464956-3E28-4625-BADE-68ECF507FF76}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NumberSorter_UT1</RootNamespace>
-    <AssemblyName>NumberSorter_UT1</AssemblyName>
+    <RootNamespace>StringSorter_UT1</RootNamespace>
+    <AssemblyName>StringSorter_UT1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

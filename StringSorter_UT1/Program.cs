@@ -1,33 +1,44 @@
 ﻿using System;
 
-namespace NumberSorter_UT1
+namespace StringSorter_UT1
 {
+    /* Author: Unknown, modified by Andrew Black since 9/28/23
+     * Purpose: Originally sorted user inserted numbers, now instead sorts user inserted strings per Unit Test 1 requirements
+     * Limitations: none
+     */
     class Program
     {
         // the definition of the delegate function data type
-        delegate double sortingFunction(double[] a);
+        delegate string sortingFunction(string[] a);
 
+        /* Main Method
+         * Purpose: Sorts User Inserted Strings
+         * Limitations: None
+         */
         static void Main(string[] args)
         {
             // declare the unsorted and sorted arrays
-            double[] aUnsorted;
-            double[] aSorted;
+            string[] aUnsorted;
+            string[] aSorted;
 
             // declare the delegate variable which will point to the function to be called
             sortingFunction findHiLow;
 
-        // a label to allow us to easily loop back to the start if there are input issues
-        start:
-            Console.WriteLine("Enter a list of space-separated numbers");
+       
+        
+            Console.WriteLine("Enter a list of space-separated words (i.e., a sentece without an ending punctation mark)");
 
-            // read the space-separated string of numbers
-            string sNumbers = Console.ReadLine();
+            // read the space-separated string of strings
+            string sStrings = Console.ReadLine();
 
-            // split the string into the an array of strings which are the individual numbers
-            string[] sNumber = sNumbers.Split(' ');
+            // split the user response into an array of strings
+            aUnsorted = sStrings.Split(' ');
 
-            // initialize the size of the unsorted array to 0
-            int nUnsortedLength = 0;
+            //below is a bunch of the original code that seemed unnecessary to achieve the requirements listed on UT1
+
+            /*
+            // declare index counter, starting from 0
+            int nUnsortedLength = 0
 
             // a double used for parsing the current array element
             double nThisNumber;
@@ -67,26 +78,26 @@ namespace NumberSorter_UT1
 
             // reset nUnsortedLength back to 0 to use as the index to store the numbers in the unsorted array
             nUnsortedLength = 0;
-            foreach (string sThisNumber in sNumber)
-            {
-                // still skip the blank strings
-                if (sThisNumber.Length == 0)
-                {
-                    continue;
-                }
+            */
 
-                // parse it into a double (we know they are all valid now)
-                nThisNumber = double.Parse(sThisNumber);
+            /* foreach (string sThisString in aUnsorted)
+             {
+                 // still skip the blank strings
+                 if (sThisString.Length == 0)
+                 {
+                     continue;
+                 }
 
-                // store the value into the array
-                aUnsorted[nUnsortedLength] = nThisNumber;
 
-                // increment the array index
-                nUnsortedLength++;
-            }
+                 // store the value into the array
+                 aUnsorted[nUnsortedLength] = sThisString;
+
+                 // increment the array index
+                 nUnsortedLength++;
+             }*/
 
             // allocate the size of the sorted array
-            aSorted = new double[nUnsortedLength];
+            aSorted = new string[aUnsorted.Length];
 
             // prompt for <a>scending or <d>escending
             Console.Write("Ascending or Descending? ");
@@ -119,32 +130,32 @@ namespace NumberSorter_UT1
 
             // write the sorted array of numbers
             Console.WriteLine("The sorted list is: ");
-            foreach (double thisNum in aSorted)
+            foreach (string thisString in aSorted)
             {
-                Console.Write($"{thisNum} ");
+                Console.Write($"{thisString} ");
             }
 
             Console.WriteLine();
         }
 
         // find the lowest value in the array of doubles
-        static double FindLowestValue(double[] array)
+        static string FindLowestValue(string[] array)
         {
             // define return value
-            double returnVal;
+            string returnVal;
 
             // initialize to the first element in the array
             // (we must initialize to an array element)
             returnVal = array[0];
 
             // loop through the array
-            foreach (double thisNum in array)
+            foreach (string thisString in array)
             {
                 // if the current value is less than the saved lowest value
-                if (thisNum < returnVal)
+                if (thisString.CompareTo(returnVal) < 0)
                 {
                     // save this as the lowest value
-                    returnVal = thisNum;
+                    returnVal = thisString;
                 }
             }
 
@@ -152,23 +163,23 @@ namespace NumberSorter_UT1
             return (returnVal);
         }
 
-        static double FindHighestValue(double[] array)
+        static string FindHighestValue(string[] array)
         {
             // define return value
-            double returnVal;
+            string returnVal;
 
             // initialize to the first element in the array
             // (we must initialize to an array element)
             returnVal = array[0];
 
             // loop through the array
-            foreach (double thisNum in array)
+            foreach (string thisString in array)
             {
                 // if the current value is greater than the saved highest value
-                if (thisNum > returnVal)
+                if (thisString.CompareTo(returnVal) > 0)
                 {
                     // save this as the highest value
-                    returnVal = thisNum;
+                    returnVal = thisString;
                 }
             }
 
@@ -178,10 +189,10 @@ namespace NumberSorter_UT1
 
 
         // remove the first instance of a value from an array
-        static void RemoveUnsortedValue(double removeValue, ref double[] array)
+        static void RemoveUnsortedValue(string removeValue, ref string[] array)
         {
             // allocate a new array to hold 1 less value than the source array
-            double[] newArray = new double[array.Length - 1];
+            string[] newArray = new string[array.Length - 1];
 
             // we need a separate counter to index into the new array, 
             // since we are skipping a value in the source array
@@ -191,10 +202,10 @@ namespace NumberSorter_UT1
             bool bAlreadyRemoved = false;
 
             // iterate through the source array
-            foreach (double srcNumber in array)
+            foreach (string srcString in array)
             {
                 // if this is the number to be removed and we didn't remove it yet
-                if (srcNumber == removeValue && !bAlreadyRemoved)
+                if (srcString == removeValue && !bAlreadyRemoved)
                 {
                     // set the flag that it was removed
                     bAlreadyRemoved = true;
@@ -204,7 +215,7 @@ namespace NumberSorter_UT1
                 }
 
                 // insert the source number into the new array
-                newArray[dest] = srcNumber;
+                newArray[dest] = srcString;
 
                 // increment the new array index to insert the next number
                 ++dest;
