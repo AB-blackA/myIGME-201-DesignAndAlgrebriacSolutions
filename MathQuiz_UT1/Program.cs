@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/* Author unknown, modified by Andrew Black since 9/28/23
- * Purpose: Generate a mathquiz for user. As part of Unit Test 1, Andrew modified the code to include the possibility of division questions
- * Limitations: none */
 namespace MathQuiz_UT1
 {
     using System.IO;
     using System;
 
+
+    /* Author unknown, modified by Andrew Black since 9/28/23
+     * Purpose: Generate a mathquiz for user. As part of Unit Test 1, Andrew modified the code to include the possibility of division questions
+     * Limitations: none */
     class Program
     {
         /* Purpose: Generates Math Quiz
