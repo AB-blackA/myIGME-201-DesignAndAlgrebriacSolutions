@@ -135,14 +135,7 @@ namespace ThreeQuestions_UT1
 
                 } while (userAnswer == "12"); 
 
-                if (userAnswer[0] == 'y')
-                {
-                    keepPlaying = true;
-                }
-                else
-                {
-                    keepPlaying = false;
-                }
+                
 
             } while (keepPlaying);
 
