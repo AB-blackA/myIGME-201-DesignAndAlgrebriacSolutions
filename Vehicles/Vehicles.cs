@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* Author: Andrew Black
+ * Purpose: Classes used for Vehicle references
+ */
 namespace Vehicles
 {
     public abstract class Vehicle
