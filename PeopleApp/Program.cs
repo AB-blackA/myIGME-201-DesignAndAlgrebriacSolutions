@@ -13,12 +13,14 @@ namespace PeopleApp
     {
         static void Main(string[] args)
         {
+            Courses courses = new Courses();
+
             // create our People SortedList!
             People people = new People();
 
             // create and initialize our person object
             Person person = null;
-            
+
             string sAction = null;
             while (sAction != "quit")
             {
@@ -105,7 +107,7 @@ namespace PeopleApp
                         // list each person in the collection
                         // iterating through a Sorted List uses a special type called KeyValuePair
                         // each list entry has a Key and a Value
-                        foreach (KeyValuePair<string,Person> thisEntry in people.sortedList)
+                        foreach (KeyValuePair<string, Person> thisEntry in people.sortedList)
                         {
                             // thisEntry.Key contains the email index
                             // and thisEntry.Value contains the Person object
@@ -172,7 +174,7 @@ namespace PeopleApp
                 string sAge = Console.ReadLine();
                 if (sAge.Length > 0)
                 {
-                    if( int.TryParse(sAge, out thisPerson.age ) )
+                    if (int.TryParse(sAge, out thisPerson.age))
                     {
                         break;
                     }
@@ -190,7 +192,7 @@ namespace PeopleApp
                 if (sLicenseID.Length > 0)
                 {
                     int nLicenseId;
-                    if ( int.TryParse(sLicenseID, out nLicenseId) )
+                    if (int.TryParse(sLicenseID, out nLicenseId))
                     {
                         // note that we cannot pass an operator field to int.TryParse()
                         // we need to use a temporary int variable to parse into
@@ -215,7 +217,7 @@ namespace PeopleApp
                     string sGPA = Console.ReadLine();
                     if (sGPA.Length > 0)
                     {
-                        if( double.TryParse(sGPA, out thisStudent.gpa ) )
+                        if (double.TryParse(sGPA, out thisStudent.gpa))
                         {
                             break;
                         }
@@ -240,7 +242,7 @@ namespace PeopleApp
             }
         }
 
-        public static void LiveADay( object obj )
+        public static void LiveADay(object obj)
         {
             // declare Person class reference variable
             Person person = (Person)obj;
@@ -264,7 +266,7 @@ namespace PeopleApp
             // but because Party() is only a member of Student
             // as a result of inheriting IStudent
             // we need to ensure obj is a Student
-            if( obj.GetType() == typeof(Student))
+            if (obj.GetType() == typeof(Student))
             {
                 // we use an IStudent reference to call Party()
                 iStudent = (IStudent)person;

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D4D11D6E-AD7A-483E-B109-C8E76F35CD52}</ProjectGuid>
+    <ProjectGuid>{DD093BEB-19D9-41F8-BD2D-680068CD493E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>PeopleApp</RootNamespace>
     <AssemblyName>PeopleApp</AssemblyName>
@@ -36,7 +36,8 @@
     <Reference Include="CourseLib">
       <HintPath>..\CourseLib\bin\Debug\CourseLib.dll</HintPath>
     </Reference>
-    <Reference Include="PeopleLib">
+    <Reference Include="PeopleLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\PeopleLib\obj\Debug\PeopleLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -49,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PeopleApp.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

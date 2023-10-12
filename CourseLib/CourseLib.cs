@@ -47,7 +47,7 @@ namespace CourseLib
                     {
                         // add to the daysOfWeek list
                         thisSchedule.daysOfWeek.Add((DayOfWeek)dow);
-
+                        
                         // select random hour of day
                         int nHour = rand.Next(0, 24);
 
@@ -121,6 +121,11 @@ namespace CourseLib
         public DateTime endTime;
 
         public List<DayOfWeek> daysOfWeek;
+
+        public Schedule()
+        {
+            daysOfWeek = new List<DayOfWeek>();
+        }
     }
 
 }
