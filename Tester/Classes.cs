@@ -39,7 +39,7 @@ namespace Classes
 
         public MyDerivedClass(string myString) : base(myString) { }
 
-        //unsure if new keyword is necessary, fixing warning
+        //getstring in parent isn't abstract so can't override by keyword
         public new string GetString()
         {
             return base.GetString() + " (output from the derived class)";
