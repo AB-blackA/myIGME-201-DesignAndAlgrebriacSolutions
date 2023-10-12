@@ -13,13 +13,19 @@ namespace PeopleApp
     {
         static void Main(string[] args)
         {
-            Courses courses = new Courses();
 
             // create our People SortedList!
             People people = new People();
 
             // create and initialize our person object
             Person person = null;
+
+            Courses courses = new Courses();
+
+
+            foreach (var item in courses.sortedList)
+                Console.WriteLine(item);
+            
 
             string sAction = null;
             while (sAction != "quit")
@@ -121,6 +127,20 @@ namespace PeopleApp
                                 // gpa only belongs to Student, so we need a Student reference variable to output that
                                 Student student = (Student)thisPerson;
                                 Console.WriteLine($"{student.gpa}");
+
+                                foreach(string course in student.courseCodes)
+                                {
+
+                                    Console.WriteLine($"{course}");
+                                    Console.WriteLine($"{courses.GetCourse(course).description}");
+
+                                    foreach(DayOfWeek dow in courses.GetCourse(course).schedule.daysOfWeek)
+                                    {
+                                        Console.WriteLine($"{dow}");
+                                        Console.WriteLine($"{courses.GetCourse(course).schedule.startTime:hh:mmtt}");
+                                        Console.WriteLine($"{courses.GetCourse(course).schedule.endTime:hh:mmtt}");
+                                    }
+                                }
                             }
 
                             if (thisPerson.GetType() == typeof(Teacher))
@@ -131,6 +151,8 @@ namespace PeopleApp
                             }
                             ++i;
                         }
+
+                        
 
                         break;
 
@@ -227,6 +249,21 @@ namespace PeopleApp
                         break;
                     }
                 } while (true);
+
+
+                do
+                {
+                    Console.Write($"Course Codes => ");
+                    string cc = Console.ReadLine();
+                    if (cc.Length != 0)
+                    {
+                        thisStudent.courseCodes.Add(cc);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }while (true);
             }
 
             if (thisPerson.GetType() == typeof(Teacher))
@@ -240,6 +277,8 @@ namespace PeopleApp
                     thisTeacher.specialty = sSpecialty;
                 }
             }
+
+            
         }
 
         public static void LiveADay(object obj)

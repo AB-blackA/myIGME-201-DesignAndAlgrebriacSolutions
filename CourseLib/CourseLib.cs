@@ -66,6 +66,11 @@ namespace CourseLib
             }
         }
 
+        public Course GetCourse(string courseCode)
+        {
+            return (Course)sortedList[courseCode];
+        }
+
         public Course this[string courseCode]
         {
             get
