@@ -7,10 +7,18 @@ using System.Collections;
 using PeopleLib;
 using CourseLib;
 
+/* Author: unknown, modified by Andrew since 10/12/23
+ * Purpose: use classes in complex ways
+ * Limitations: requires references to PoepleLib and CourseLib
+ */
 namespace PeopleApp
 {
-    class PeopleApp
+    static class PeopleApp
     {
+        /* Method: Main
+         * Purpose: Create People and Courses and Access Other Methods
+         * Limitations: none
+         */
         static void Main(string[] args)
         {
 
@@ -21,10 +29,6 @@ namespace PeopleApp
             Person person = null;
 
             Courses courses = new Courses();
-
-
-            foreach (var item in courses.sortedList)
-                Console.WriteLine(item);
             
 
             string sAction = null;
