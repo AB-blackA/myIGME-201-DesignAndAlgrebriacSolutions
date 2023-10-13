@@ -26,7 +26,7 @@ namespace Classes
             this.myString = myString;
         }
 
-        public string GetString()
+        public virtual string GetString()
         {
             return this.myString;
         }
@@ -39,8 +39,7 @@ namespace Classes
 
         public MyDerivedClass(string myString) : base(myString) { }
 
-        //getstring in parent isn't abstract so can't override by keyword
-        public new string GetString()
+        public override string GetString()
         {
             return base.GetString() + " (output from the derived class)";
         }
