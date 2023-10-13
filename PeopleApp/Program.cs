@@ -135,14 +135,16 @@ namespace PeopleApp
                                 foreach(string course in student.courseCodes)
                                 {
 
-                                    Console.WriteLine($"{course}");
-                                    Console.WriteLine($"{courses.GetCourse(course).description}");
+                                    Course cs = courses[course];
 
-                                    foreach(DayOfWeek dow in courses.GetCourse(course).schedule.daysOfWeek)
+                                    Console.WriteLine($"{course}");
+                                    Console.WriteLine($"{cs.description}");
+
+                                    foreach(DayOfWeek dow in cs.schedule.daysOfWeek)
                                     {
                                         Console.WriteLine($"{dow}");
-                                        Console.WriteLine($"{courses.GetCourse(course).schedule.startTime:hh:mmtt}");
-                                        Console.WriteLine($"{courses.GetCourse(course).schedule.endTime:hh:mmtt}");
+                                        Console.WriteLine($"{cs.schedule.startTime:hh:mmtt}");
+                                        Console.WriteLine($"{cs.schedule.endTime:hh:mmtt}");
                                     }
                                 }
                             }
