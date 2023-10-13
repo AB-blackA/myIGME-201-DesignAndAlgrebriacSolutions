@@ -12,14 +12,28 @@ namespace aBlack_HelloWorld
 {
     internal class Program
     {
-        private static int birthMonth = 9;
-        private static string birthStone = "sapphire";
+        /*private static int birthMonth = 9;
+        private static string birthStone = "sapphire";*/
+
+         
 
         //main method to display my name, plus a couple other methods I wrote for fun
         static void Main(string[] args)
         {
+            string test = Tstring();
+            Console.WriteLine("pee");
+        }
 
-            //Console.WriteLine("Hello World!");
+        public static string Tstring()
+        {
+             int unitCount = 4;
+        string unitName = "peepeepee";
+        int unitCost = 7;
+            //return ( "" +unitCount + " " +unitName + " items at $" +unitCost + " each, total cost $" +(unitCount * unitCost));
+            return "pee";
+
+        }
+            /*//Console.WriteLine("Hello World!");
             Console.WriteLine("Andrew Black");
 
             ModifyBirthMonth();
@@ -48,6 +62,6 @@ namespace aBlack_HelloWorld
 
             Console.WriteLine("is your birthMonth " + birthMonth + "?");
 
-        }
+        }*/
     }
 }

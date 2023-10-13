@@ -80,6 +80,7 @@ namespace MadLibs
                 //close second streamreader
                 input.Close();
 
+
                 //introduce user to program
                 Console.WriteLine("Welcome to Madlibs! Here we have a handful of stories that you get to help write.\nIt's easy, just write in a word for the appropriate prompt" +
                     " when asked and we'll give you the story at the end.\n");
@@ -214,6 +215,7 @@ namespace MadLibs
             //inform user if file not found
             }catch (FileNotFoundException e)
             {
+
                 Console.WriteLine("Error, file not found. Please ensure 'MadLibsTemplate.txt' is in your 'c:\\\\templates' folder.");
             }
 
