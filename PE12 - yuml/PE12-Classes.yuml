@@ -2,5 +2,5 @@
 // {generate:true}
 // {direction:topDown}
 
-[+MyClass| -myString:string | +GetString():string]
-[+MyClass] <-.- [+MyDerivedClass | | +GetString():string]
+[+MyClass| -myString:string | +GetString():<<virtual>>;string]
+[+MyClass] <-.- [+MyDerivedClass | | +GetString():<<override>>:string]
