@@ -12,9 +12,7 @@ namespace PE15___Classier
 {
      public interface Ball
     {
-
         void ThrowBall();
-
     }
 
     public class BaseBall : Ball
@@ -61,12 +59,8 @@ namespace PE15___Classier
             BaseBall bb = new BaseBall("stitchy");
 
 
-            MyMethod(fb); MyMethod(bb);
-
-
-
-
-
+            MyMethod(fb);
+            MyMethod(bb);
         }
 
         /* Method: MyMethod (name picked from assignment constraints)
