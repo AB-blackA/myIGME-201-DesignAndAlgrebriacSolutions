@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* Author: Andrew Black
+* Purpose: Creation of Interface and Classes for Testing Purposes
+* Limitations: None
+*/
 namespace PE15___Classier
 {
      public interface Ball
     {
 
         void ThrowBall();
-
 
     }
 
@@ -45,8 +48,12 @@ namespace PE15___Classier
         }
     }
 
-    internal class Program
+    internal static class Program
     {
+        /* Method: Main
+        * Purpose: Create Balls 
+        * Limitations: none
+        */
         public static void Main(string[] args)
         {
 
@@ -62,6 +69,10 @@ namespace PE15___Classier
 
         }
 
+        /* Method: MyMethod (name picked from assignment constraints)
+        * Purpose: Recieve and Throw Balls
+        * Limitations: none
+        */
         public static void MyMethod(Ball myObject)
         {
             myObject.ThrowBall();
