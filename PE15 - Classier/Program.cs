@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PE15___Classier
 {
-    public interface Ball
+     public interface Ball
     {
 
         void ThrowBall();
@@ -45,11 +45,8 @@ namespace PE15___Classier
         }
     }
 
-
-
     internal class Program
     {
-
         public static void Main(string[] args)
         {
 
@@ -57,8 +54,7 @@ namespace PE15___Classier
             BaseBall bb = new BaseBall("stitchy");
 
 
-            fb.ThrowBall();
-            bb.ThrowBall();
+            MyMethod(fb); MyMethod(bb);
 
 
 
@@ -66,10 +62,9 @@ namespace PE15___Classier
 
         }
 
-        void MyMethod(Ball myObject)
+        public static void MyMethod(Ball myObject)
         {
             myObject.ThrowBall();
         }
-
     }
 }
