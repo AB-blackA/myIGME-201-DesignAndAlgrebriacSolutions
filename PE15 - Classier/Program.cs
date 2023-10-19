@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 */
 namespace PE15___Classier
 {
-     public interface Ball
+     public interface IBall
     {
         void ThrowBall();
     }
 
-    public class BaseBall : Ball
+    public class BaseBall : IBall
     {
 
         private string myBallName;
@@ -31,7 +31,7 @@ namespace PE15___Classier
         }
     }
 
-    public class Football : Ball
+    public class Football : IBall
     {
         private string myBallName;
 
@@ -67,7 +67,7 @@ namespace PE15___Classier
         * Purpose: Recieve and Throw Balls
         * Limitations: none
         */
-        public static void MyMethod(Ball myObject)
+        public static void MyMethod(IBall myObject)
         {
             myObject.ThrowBall();
         }
