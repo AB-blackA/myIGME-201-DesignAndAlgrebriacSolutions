@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-
-namespace Playground
+namespace PE15___Classier
 {
     public interface Ball
     {
@@ -50,16 +47,17 @@ namespace Playground
 
 
 
-        internal class Playground {     
-    
+    internal class Program
+    {
+
         public static void Main(string[] args)
         {
 
-                Football fb = new Football("grippy");
-                BaseBall bb = new BaseBall("stitchy");
+            Football fb = new Football("grippy");
+            BaseBall bb = new BaseBall("stitchy");
 
 
-                fb.ThrowBall(); 
+            fb.ThrowBall();
             bb.ThrowBall();
 
 
@@ -68,13 +66,10 @@ namespace Playground
 
         }
 
-            void MyMethod(Ball myObject)
-            {
-                myObject.ThrowBall();
-            }
+        void MyMethod(Ball myObject)
+        {
+            myObject.ThrowBall();
+        }
 
     }
-
-   
 }
-
