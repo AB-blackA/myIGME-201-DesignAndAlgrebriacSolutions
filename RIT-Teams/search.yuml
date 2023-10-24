@@ -1,0 +1,34 @@
+// {type:class}
+// {generate:true}
+// {direction:topDown}
+
+
+[+A.Games|-name:string;-platforms:List<string>|+Name:string;+Platform:List<String>|(name:string);(platforms:List<string>)]
+[+Game]
+[+GameNotFound]
+[+A.Games] <-.- [+Game]
+[+A.Games] <-.- [+GameNotFound]
+
+
+[+GameDatabase|-games:KeyValuePair<Games, string>;-search:Searcher|+Search:Searcher;+ReturnSearch(game:KeyValuePair<Game, string>):KeyValuePair<Games, string>;+AddGame(game:KeyValuePair<Game, string>)|();(gameList:KeyValuePair<string, string)>]
+[+GameDatabase] 1-0..* [+Game]
+[+GameDatabase] 1-1 [+GameNotFound]
+
+[+Searcher|-foundGames:KeyValuePair<Game, string>;-foundTeams:List<Teams>;-gameDB:GameDatabase;-teamDB:TeamDatabase;-requester:Requester;-ui:UserInterface|+UI:UserInterface;+Requester:Requester;+GameDB:GameDatabase;+TeamDB:TeamDatabase;+SearchGame(gameName:string):KeyValuePair<Game, Team>;+SearchGame(gameName:string,platform:string):KeyValuePair<Game, Team>;+SearchTeam(game:KeyValuePair<Game, string>):Team;]
+[+Searcher] 1-1 [+GameDatabase]
+
+[+TeamDatabase|-teams:List<Teams>;-search:Searcher|+Search:Searcher;+ReturnTeamsByGame(game:KeyValuePair<Game, string>):Team;+AddGameToMyTeam(KeyValuePair<Game, string>)]
+[+TeamDatabase] 1-0..*[+Team]
+[+TeamDatabase] 1-1 [+TeamNotFound]
+[+A.Teams] <-.- [+Team]
+[+A.Teams] <-.- [+TeamNotFound]
+[+Searcher] 1-1 [+TeamDatabase]
+
+[+RequestQuery|-gameRequests:KeyValuePair<string, string>;|+GameRequests:KeyValuePair<string, string>]
+[+Requester|-requestInfo:KeyValuePair<string, string>;-rq:RequestQuery;-search:Searcher|+Search:Searcher;+RQ:RequestQuery;+AddRequest(gameName:string);+AddRequest(gameName:string, console:string);+AddRequest(gameInfo:KeyValuePair<string, string>)]
+[+RequestQuery] 1-1 [+Requester]
+
+[+Searcher] 1-1 [+Requester]
+
+[+UserInterface|-search:Searcher|+Search:Searcher;+AskToAddTeam();+AskToAddGame()]
+[+UserInterface] 1-1 [+Searcher]
