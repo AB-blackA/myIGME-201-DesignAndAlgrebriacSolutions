@@ -109,7 +109,7 @@ namespace PE13___CatsDogs
                     }
 
                     //try for each interface possibility
-                    try { 
+                    if(thisPet.GetType() == typeof(Cat)) { 
                         iCat = (ICat)thisPet;
                         switch (activity)
                         {
@@ -132,7 +132,7 @@ namespace PE13___CatsDogs
                         }
                     }
 
-                    catch 
+                    else 
                     { 
                         iDog = (IDog)thisPet;
                         switch (activity)
