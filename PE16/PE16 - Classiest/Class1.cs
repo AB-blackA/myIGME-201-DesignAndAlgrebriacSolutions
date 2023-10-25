@@ -98,15 +98,9 @@ namespace PE16___Classiest
 
         private string source;
 
-        public CupOfCocoa() : this(false)
-        { 
-            
-        }
+        public CupOfCocoa() : this(false) { }
 
-        public CupOfCocoa(bool marshmallows) : base("Expensive Organic Brand")
-        {
-
-        }
+        public CupOfCocoa(bool marshmallows) : base("Expensive Organic Brand") { }
 
         public string Source
         {
