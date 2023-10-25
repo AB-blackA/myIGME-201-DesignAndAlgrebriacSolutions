@@ -98,7 +98,7 @@ namespace PE16___Classiest
 
         private string source;
 
-        public CupOfCocoa() 
+        public CupOfCocoa() : this(false)
         { 
             
         }
