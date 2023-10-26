@@ -32,6 +32,11 @@ namespace Playground
     public sealed class Circus
     {
         public string name;
+
+        public Circus(string i)
+        {
+            this.name = i;
+        }
     }
 
 
@@ -41,10 +46,31 @@ namespace Playground
     static class Playground
     {
 
-        static void Main(string[] args)
+        public class MyClass
         {
-            Circus c = new Circus();
-            Console.WriteLine(c.name);
+            public int myInt;
+
+            public MyClass(int nVal)
+            {
+                this.myInt += nVal;
+            }
+        }
+
+        public class MyClass2 : MyClass 
+        {
+            public MyClass2(int nVal) : base(nVal)
+                {
+                this.myInt = (this.myInt + 2) * 4;
+                }
+        }
+
+        static void Main(string[] args)
+        {/*
+            Circus c = new Circus("ya boy");
+            Console.WriteLine(c.name);*/
+
+            MyClass2 m1 = new MyClass2(42);
+            Console.WriteLine(m1.myInt);
         }
     }
    
