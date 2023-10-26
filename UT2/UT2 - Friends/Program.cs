@@ -91,7 +91,7 @@ namespace UT2___Friends
     {
 
         /* Method: Main
-         * Purpose: Create Friend objects and use some of their fields
+         * Purpose: Create Friend objects and use some of their Properties
          * Limitations: none
          */
         static void Main(string[] args)
