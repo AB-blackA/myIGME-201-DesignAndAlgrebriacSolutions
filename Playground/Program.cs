@@ -9,72 +9,44 @@ using System.Threading.Tasks;
 
 namespace Playground
 {
-    public interface Ball
+
+    public class Zoo
     {
-
-        void ThrowBall();
-
-
-    }
-
-    public class BaseBall : Ball
-    {
-
-        private string myBallName;
-
-        public BaseBall(string s)
+        private string name;
+        public string Name
         {
-            this.myBallName = s;
-        }
-
-        public virtual void ThrowBall()
-        {
-            Console.WriteLine("{0} was pitched.", this.myBallName);
-        }
-    }
-
-    public class Football : Ball
-    {
-        private string myBallName;
-
-        public Football(string s)
-        {
-            this.myBallName = s;
-        }
-
-        public virtual void ThrowBall()
-        {
-            Console.WriteLine("{0} was passed.", this.myBallName);
-        }
-    }
-
-
-
-        internal class Playground {     
-    
-        public static void Main(string[] args)
-        {
-
-                Football fb = new Football("grippy");
-                BaseBall bb = new BaseBall("stitchy");
-
-
-                fb.ThrowBall(); 
-            bb.ThrowBall();
-
-
-
-
-
-        }
-
-            void MyMethod(Ball myObject)
+            get
             {
-                myObject.ThrowBall();
+                //this.name = value;
+                return this.name;
             }
 
+            set
+            {
+                //return this.name;
+                this.name = value;
+            }
+        }
     }
 
+    public sealed class Circus
+    {
+        public string name;
+    }
+
+
+
+
+
+    static class Playground
+    {
+
+        static void Main(string[] args)
+        {
+            Circus c = new Circus();
+            Console.WriteLine(c.name);
+        }
+    }
    
 }
 
