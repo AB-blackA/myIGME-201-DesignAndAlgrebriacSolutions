@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 /* Author: Andrew Black since 10/26/23
  * Purpose: Implementation of Self Created Dining Class per Unit Test 2 Practical Question
@@ -15,8 +16,8 @@ namespace UT2___DiningClass
         private string location;
         private string cuisine;
         private string name;
-        private double openTime;
-        private double closingTime;
+        private string openTime;
+        private string closingTime;
 
         public string Location
         {
@@ -54,7 +55,7 @@ namespace UT2___DiningClass
             }
         }
 
-        public double OpenTime
+        public string OpenTime
         {
             get
             {
@@ -66,7 +67,7 @@ namespace UT2___DiningClass
             }
         }
 
-        public double CloseTime
+        public string CloseTime
         {
             get
             {
@@ -78,7 +79,7 @@ namespace UT2___DiningClass
             }
         }
 
-        public Restaurant(string location, string cuisine, string name, double openTime, double closingTime)
+        public Restaurant(string location, string cuisine, string name, string openTime, string closingTime)
         {
             this.location = location;
             this.cuisine = cuisine;
@@ -89,7 +90,11 @@ namespace UT2___DiningClass
 
         public virtual void DisplayInfo()
         {
-
+            Console.WriteLine("\n{0}" +
+                "\n{1}" +
+                "\n{2}" +
+                "\nOpening Hours: {3}" +
+                "\nClosing Hours: {4}", this.name, this.cuisine, this.location, this.openTime, this.closingTime);
         }
 
         public abstract void AnnounceHolidayTimes();
@@ -194,71 +199,85 @@ namespace UT2___DiningClass
         Supply OrderBulk(string name);
     }
 
-    public class IndianGrill : Restaurant, IServing, IRestocking
+    public class IndianRestaurant : Restaurant, IServing, IRestocking
     {
-        public IndianGrill(string location, string cuisine, string name, double openTime, double closingTime) : base(location, cuisine, name, openTime, closingTime)
+        public IndianRestaurant(string location, string cuisine, string name, string openTime, string closingTime) : base(location, cuisine, name, openTime, closingTime)
         {
         }
 
         public override void AnnounceHolidayTimes()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("No upcoming holiday hours");
         }
 
         public Supply OrderBulk(string name)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("{0} added to order", name);
+            return new Supply(name, "");
         }
 
         public Food OrderProduce(string name)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Added {0} to order", name);
+            return new Food(name, 0, "");
         }
 
         public Food ServeFood()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Serving naan!");
+            return new Food("generic food", 0, "");
+           
         }
 
         public void TakeOrder(string orderInfo)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Preparing {0}", orderInfo);
         }
 
-        public void OpenBuffet() { }
+        public void OpenBuffet() 
+        {
+            Console.WriteLine("Buffet's open!");
+        }
     }
 
-    public class TheRedFern : Restaurant, IServing, IRestocking
+    public class HumbleVeganRestaurant : Restaurant, IServing, IRestocking
     {
-        public TheRedFern(string location, string cuisine, string name, double openTime, double closingTime) : base(location, cuisine, name, openTime, closingTime)
+        public HumbleVeganRestaurant(string location, string cuisine, string name, string openTime, string closingTime) : base(location, cuisine, name, openTime, closingTime)
         {
         }
 
         public override void AnnounceHolidayTimes()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("No upcoming holiday hours");
         }
 
         public Supply OrderBulk(string name)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("{0} added to order", name);
+            return new Supply(name, "");
         }
 
         public Food OrderProduce(string name)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Added {0} to order", name);
+            return new Food(name, 0, "");
         }
 
         public Food ServeFood()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Serving tofu!");
+            return new Food("generic food", 0, "");
+
         }
 
         public void TakeOrder(string orderInfo)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Preparing {0}", orderInfo);
         }
 
-        public void HoldCharityEvent() { }
+        public void HoldCharityEvent() 
+        {
+            Console.WriteLine("For this month only, 10% of all proceed go towards a humane animal society");
+        }
     }
 }
