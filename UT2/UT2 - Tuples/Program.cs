@@ -24,13 +24,13 @@ namespace UT2___Tuples
             double x;
             double z;
         
-            //Sorted list containing triple doubles as a key and a double as a value
+            //Sorted list containing "triple doubles" as a key and a double as a value
             SortedList<(double, double, double), double> results = new SortedList<(double, double, double), double>();
 
-            //unused ints representing where in the triple double part of our sorted list our specific variables are stored
-            int wIndex = 0;
+            //unused ints representing where in the "triple double" part of our sorted list our specific variables are stored
+            /*int wIndex = 0;
             int yIndex = 1;
-            int xIndex = 2;
+            int xIndex = 2;*/
 
             //incrementers for our variables in upcoming for loop, set by Unit Test 2 question
             double wInc = .2;
@@ -60,10 +60,10 @@ namespace UT2___Tuples
 
             //commented out code to confirm results properly added
 
-            foreach (var kvp in results)
+            /*foreach (var kvp in results)
             {
                 Console.WriteLine("key: {0}, value: {1}", kvp.Key, kvp.Value);
-            }
+            }*/
 
             //Console.Write(results.ContainsKey((0.0, 1.0, 4.0)));
 
