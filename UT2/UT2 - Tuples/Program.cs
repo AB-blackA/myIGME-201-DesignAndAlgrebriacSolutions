@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/* Author: Andrew Black
+/* Author: Andrew Black since 10/26/23
  * Purpose: Unit Test Practical Question regarding Use of SortedList
  * Limitations: None
  */
@@ -33,6 +33,7 @@ namespace UT2___Tuples
             int xIndex = 2;*/
 
             //incrementers for our variables in upcoming for loop, set by Unit Test 2 question
+            //yxInc is the incrementer size for both the X and Y value
             double wInc = .2;
             double yxInc = .1;
 
