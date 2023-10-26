@@ -78,6 +78,66 @@ namespace UT2___PhoneUML
         }
 
         public void TimeTravel() { }
+
+
+        //overloaded operators added as a part of question 5 in Unit Test 2
+        //logic of comparison based on Dr's number
+        //logic behind WhichDrWho equaling 10 "overriding" default operator rules is specified by Unit Test instructions
+        public static bool operator ==(Tardis a, Tardis b)
+        {
+            return (a.WhichDrWho == b.WhichDrWho);
+        }
+        public static bool operator !=(Tardis a, Tardis b)
+        {
+            return !(a.WhichDrWho == b.WhichDrWho);
+        }
+
+        public static bool operator <(Tardis a, Tardis b)
+        {
+            if(a.WhichDrWho == 10)
+            {
+                return false;
+            }
+            else
+            {
+                return (a.WhichDrWho < b.WhichDrWho);
+            }
+        }
+        public static bool operator >(Tardis a, Tardis b)
+        {
+            if(b.whichDrWho == 10)
+            {
+                return false;
+            }
+            else
+            {
+                return (a.WhichDrWho > b.WhichDrWho);
+            }
+        }
+
+        public static bool operator <=(Tardis a, Tardis b)
+        {
+            if(a.WhichDrWho == 10 && b.WhichDrWho != 10)
+            {
+                return false;
+            }
+            else
+            {
+                return (a.WhichDrWho <= b.WhichDrWho);
+            }
+        }
+
+        public static bool operator >=(Tardis a, Tardis b)
+        {
+            if(b.WhichDrWho == 10 && a.WhichDrWho != 10)
+            {
+                return false;
+            }
+            else
+            {
+                return (a.WhichDrWho >= b.WhichDrWho);
+            }
+        }
     }
 
     public class PushButtonPhone : Phone, PhoneInterface
