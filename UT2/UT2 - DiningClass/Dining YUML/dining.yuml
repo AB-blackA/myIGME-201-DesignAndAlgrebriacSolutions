@@ -1,0 +1,27 @@
+// {type:class}
+// {generate:true}
+// {direction:topDown} 
+
+[+A.Restaurant| -location:string; -cuisine:string; -name:string; -openTime:double; -closingTime:double; | +Location:string; +Cuisine:string; +Name:string; +OpenTime:double; +ClosingTime:double; +DisplayInfo():v; +AnnounceHolidayTimes():a|(location:string, cuisine:string, name:string, openTime:double, closingTime:double)]
+
+[+I.IServing| TakeOrder(orderInfo:string); ServeFood():Food]
+[+I.IRestocking| OrderProduce(name:string):Food; OrderBulk(name:string):Supply]
+
+[+IndianGrill| |+OrderProduce(name:string):Food; +OrderBulk(name:string):Supply; +TakeOrder(orderInfo:string); +ServeFood():Food; +OpenBuffet(); +AnnounceHolidayTimes():o| (location:string, cuisine:string, name:string, openTime:double, closingTime:double):base(location, cuisine, name, openTime, closingTime);]
+[+TheRedFern| |+OrderProduce(name:string):Food; +OrderBulk(name:string):Supply; +TakeOrder(orderInfo:string); +ServeFood():Food; +HoldCharityEvent(); +AnnounceHolidayTimes():o| (location:string, cuisine:string, name:string, openTime:double, closingTime:double):base(location, cuisine, name, openTime, closingTime);] 
+
+[+Food| -name:string; -shelfLife:int; -description:string | +Name:string; +ShelfLife:int; +Description:String | (name:string, shelfLife:int, description:string)]
+[+Supply| -name:string; -description:string | +Name:string; + Description:string; | (name:string, description:string) ]
+
+[+A.Restaurant] <-.- [+IndianGrill]
+[+A.Restaurant] <-.- [+TheRedFern]
+
+[+I.IServing] ^ [+IndianGrill]
+[+I.IRestocking] ^ [+IndianGrill]
+[+I.IServing] ^ [+TheRedFern]
+[+I.IRestocking] ^ [+TheRedFern]
+
+[+IndianGrill] 1-0..* [+Food]
+[+IndianGrill] 1-0..* [+Supply]
+[+TheRedFern] 1-0..* [+Food]
+[+TheRedFern] 1-0..* [+Supply]
