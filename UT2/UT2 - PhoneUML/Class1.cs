@@ -77,7 +77,7 @@ namespace UT2___PhoneUML
             }
         }
 
-        public void TimeTravel() { }
+        public void TimeTravel() { Console.WriteLine("vrm"); }
 
 
         //overloaded operators added as a part of question 5 in Unit Test 2
@@ -159,7 +159,7 @@ namespace UT2___PhoneUML
         public bool phoneBook;
 
         public void OpenDoor() { }
-        public void CloseDoor() { }
+        public void CloseDoor() { Console.WriteLine("door closed"); }
 
     }
 

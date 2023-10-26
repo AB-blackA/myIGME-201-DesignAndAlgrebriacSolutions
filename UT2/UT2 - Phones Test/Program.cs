@@ -44,6 +44,21 @@ namespace UT2___Phones_Test
                 //call its methods
                 phoneInterface.MakeCall();
                 phoneInterface.HangUp();
+
+                //next if statements added as instructions of question 7
+                //purpose to test if Tardis or PhoneBooth then call a relevant method
+                //NOTE!!! As of now the UML does not allow for an object to be both a PhoneBooth and a Tardis, so an 
+                //if/elif is appropriate in this instance
+                if(obj.GetType() == typeof(Tardis))
+                {
+                    Tardis tardis = (Tardis)obj;
+                    tardis.TimeTravel();
+                }
+                else if(obj.GetType() == typeof(PhoneBooth))
+                {
+                    PhoneBooth phonebooth = (PhoneBooth)obj;
+                    phonebooth.CloseDoor();
+                }
             }
             //catch any non-PhoneInterface objects
             catch
