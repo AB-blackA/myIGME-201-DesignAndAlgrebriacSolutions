@@ -146,15 +146,15 @@ namespace Dynamic_People
             // 
             // panel1
             // 
-            panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            panel1.Controls.Add(emailLabel);
-            panel1.Controls.Add(photoGroupBox);
-            panel1.Controls.Add(toolStrip1);
-            panel1.Location = new System.Drawing.Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(189, 25);
-            panel1.TabIndex = 0;
-            panel1.Tag = person;
+            panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            panel.Controls.Add(emailLabel);
+            panel.Controls.Add(photoGroupBox);
+            panel.Controls.Add(toolStrip1);
+            panel.Location = new System.Drawing.Point(3, 3);
+            panel.Name = "panel1";
+            panel.Size = new System.Drawing.Size(189, 25);
+            panel.TabIndex = 0;
+            panel.Tag = person;
             // 
             // emailLabel
             // 
@@ -185,7 +185,7 @@ namespace Dynamic_People
             toolStripButton1.Size = new System.Drawing.Size(23, 22);
             toolStripButton1.Text = "toolStripButton1";
             toolStripButton1.Click += new EventHandler(ToolStripButton1__Click);
-            toolStripButton1.Tag = panel1;
+            toolStripButton1.Tag = panel;
             // 
             // toolStripLabel1
             // 
@@ -197,7 +197,7 @@ namespace Dynamic_People
             toolStripLabel1.Text = person.name;
             toolStripLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             toolStripLabel1.Click += new EventHandler(ToolStripLabel1__Click);
-            toolStripLabel1.Tag = panel1;
+            toolStripLabel1.Tag = panel;
             // 
             // photoGroupBox
             // 
