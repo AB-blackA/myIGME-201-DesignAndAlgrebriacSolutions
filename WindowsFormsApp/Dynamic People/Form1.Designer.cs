@@ -37,21 +37,20 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.emailLabel = new System.Windows.Forms.Label();
+            this.photoGroupBox = new System.Windows.Forms.GroupBox();
+            this.photoPictureBox = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.photoGroupBox = new System.Windows.Forms.GroupBox();
-            this.photoPictureBox = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.photoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -109,7 +108,6 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.panel1);
-            this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -134,6 +132,27 @@
             this.emailLabel.Size = new System.Drawing.Size(189, 23);
             this.emailLabel.TabIndex = 1;
             this.emailLabel.Text = "label1";
+            // 
+            // photoGroupBox
+            // 
+            this.photoGroupBox.Controls.Add(this.photoPictureBox);
+            this.photoGroupBox.Location = new System.Drawing.Point(13, 55);
+            this.photoGroupBox.Name = "photoGroupBox";
+            this.photoGroupBox.Size = new System.Drawing.Size(118, 86);
+            this.photoGroupBox.TabIndex = 52;
+            this.photoGroupBox.TabStop = false;
+            this.photoGroupBox.Text = "Photo";
+            // 
+            // photoPictureBox
+            // 
+            this.photoPictureBox.BackColor = System.Drawing.Color.LightGray;
+            this.photoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.photoPictureBox.Location = new System.Drawing.Point(3, 16);
+            this.photoPictureBox.Name = "photoPictureBox";
+            this.photoPictureBox.Size = new System.Drawing.Size(112, 67);
+            this.photoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.photoPictureBox.TabIndex = 0;
+            this.photoPictureBox.TabStop = false;
             // 
             // toolStrip1
             // 
@@ -166,34 +185,6 @@
             this.toolStripLabel1.Text = "toolStripLabel1";
             this.toolStripLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // photoGroupBox
-            // 
-            this.photoGroupBox.Controls.Add(this.photoPictureBox);
-            this.photoGroupBox.Location = new System.Drawing.Point(13, 55);
-            this.photoGroupBox.Name = "photoGroupBox";
-            this.photoGroupBox.Size = new System.Drawing.Size(118, 86);
-            this.photoGroupBox.TabIndex = 52;
-            this.photoGroupBox.TabStop = false;
-            this.photoGroupBox.Text = "Photo";
-            // 
-            // photoPictureBox
-            // 
-            this.photoPictureBox.BackColor = System.Drawing.Color.LightGray;
-            this.photoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.photoPictureBox.Location = new System.Drawing.Point(3, 16);
-            this.photoPictureBox.Name = "photoPictureBox";
-            this.photoPictureBox.Size = new System.Drawing.Size(112, 67);
-            this.photoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.photoPictureBox.TabIndex = 0;
-            this.photoPictureBox.TabStop = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(212, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 20);
-            this.textBox1.TabIndex = 1;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,13 +199,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.photoGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -233,7 +223,6 @@
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.GroupBox photoGroupBox;
         private System.Windows.Forms.PictureBox photoPictureBox;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

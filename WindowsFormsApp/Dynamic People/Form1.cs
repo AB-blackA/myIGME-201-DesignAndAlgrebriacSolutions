@@ -40,17 +40,8 @@ namespace Dynamic_People
         {
             InitializeComponent();
 
+            Globals.AddPeopleSampleData();
             Globals.AddCoursesSampleData();
-
-            foreach(KeyValuePair<string, Person> kvp in Globals.people.sortedList)
-            {
-                this.textBox1.Text += kvp.Value;
-                this.textBox1.Text += "1";
-                
-            }
-
-            this.textBox1.Text += "1";
-            this.textBox1.Text += "asda";
 
             this.teacherButton.Click += new EventHandler(TeacherButton__Click);
             this.studentButton.Click += new EventHandler(StudentButton__Click);
