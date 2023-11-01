@@ -144,7 +144,7 @@ namespace Dynamic_People
             PictureBox photoPictureBox = new System.Windows.Forms.PictureBox();
 
             // 
-            // panel1
+            // panel
             // 
             panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             panel.Controls.Add(emailLabel);
