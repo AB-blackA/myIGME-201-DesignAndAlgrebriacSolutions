@@ -36,6 +36,12 @@
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.reviewRichTextBox = new System.Windows.Forms.RichTextBox();
             this.reviewLabel = new System.Windows.Forms.Label();
+            this.courseListView = new System.Windows.Forms.ListView();
+            this.codeHdr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.descHdr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.instructorName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dowHdr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timeHdr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // exitButton
@@ -109,6 +115,49 @@
             this.reviewLabel.TabIndex = 16;
             this.reviewLabel.Text = "Review:";
             // 
+            // courseListView
+            // 
+            this.courseListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.codeHdr,
+            this.descHdr,
+            this.instructorName,
+            this.dowHdr,
+            this.timeHdr});
+            this.courseListView.FullRowSelect = true;
+            this.courseListView.HideSelection = false;
+            this.courseListView.Location = new System.Drawing.Point(1, 2);
+            this.courseListView.MultiSelect = false;
+            this.courseListView.Name = "courseListView";
+            this.courseListView.Size = new System.Drawing.Size(798, 348);
+            this.courseListView.TabIndex = 1;
+            this.courseListView.UseCompatibleStateImageBehavior = false;
+            this.courseListView.View = System.Windows.Forms.View.Details;
+            // 
+            // codeHdr
+            // 
+            this.codeHdr.Text = "Code";
+            this.codeHdr.Width = 180;
+            // 
+            // descHdr
+            // 
+            this.descHdr.Text = "Description";
+            this.descHdr.Width = 250;
+            // 
+            // instructorName
+            // 
+            this.instructorName.Text = "Instructor";
+            this.instructorName.Width = 175;
+            // 
+            // dowHdr
+            // 
+            this.dowHdr.Text = "Days";
+            this.dowHdr.Width = 100;
+            // 
+            // timeHdr
+            // 
+            this.timeHdr.Text = "Time";
+            this.timeHdr.Width = 300;
+            // 
             // CourseListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,6 +166,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CancelButton = this.exitButton;
             this.ClientSize = new System.Drawing.Size(800, 505);
+            this.Controls.Add(this.courseListView);
             this.Controls.Add(this.reviewLabel);
             this.Controls.Add(this.reviewRichTextBox);
             this.Controls.Add(this.descriptionLabel);
@@ -141,6 +191,12 @@
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.RichTextBox reviewRichTextBox;
         private System.Windows.Forms.Label reviewLabel;
+        private System.Windows.Forms.ListView courseListView;
+        private System.Windows.Forms.ColumnHeader codeHdr;
+        private System.Windows.Forms.ColumnHeader descHdr;
+        private System.Windows.Forms.ColumnHeader instructorName;
+        private System.Windows.Forms.ColumnHeader dowHdr;
+        private System.Windows.Forms.ColumnHeader timeHdr;
     }
 }
 
