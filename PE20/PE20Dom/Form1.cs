@@ -39,6 +39,9 @@ namespace PE20Dom
             // or if you want to use the URL  (only use one of these Navigate() statements)
             this.webBrowser1.Navigate("people.rit.edu/dxsigm/example.html");
 
+            //suppress errors
+            webBrowser1.ScriptErrorsSuppressed = true;
+
 
         }
 
