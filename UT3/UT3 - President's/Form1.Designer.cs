@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.presGroupBox = new System.Windows.Forms.GroupBox();
             this.benHarrisonRadioButton = new System.Windows.Forms.RadioButton();
             this.georgeWashingtonRadioButton = new System.Windows.Forms.RadioButton();
@@ -61,19 +62,22 @@
             this.eisenhowerTextBox = new System.Windows.Forms.TextBox();
             this.reaganTextBox = new System.Windows.Forms.TextBox();
             this.willMcKinleyTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton17 = new System.Windows.Forms.RadioButton();
-            this.radioButton18 = new System.Windows.Forms.RadioButton();
-            this.radioButton19 = new System.Windows.Forms.RadioButton();
-            this.radioButton20 = new System.Windows.Forms.RadioButton();
-            this.radioButton21 = new System.Windows.Forms.RadioButton();
+            this.filterGroupBox = new System.Windows.Forms.GroupBox();
+            this.filterRepublicanRadioButton = new System.Windows.Forms.RadioButton();
+            this.filterDemRadioButton = new System.Windows.Forms.RadioButton();
+            this.filterDemRepublicanRadioButton = new System.Windows.Forms.RadioButton();
+            this.filterFederalistRadioButton = new System.Windows.Forms.RadioButton();
+            this.filterAllRadioButton = new System.Windows.Forms.RadioButton();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.presidentPictureBox = new System.Windows.Forms.PictureBox();
+            this.webBrowserGroupBox = new System.Windows.Forms.GroupBox();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.presGroupBox.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.filterGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.presidentPictureBox)).BeginInit();
+            this.webBrowserGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // presGroupBox
@@ -112,7 +116,7 @@
             this.presGroupBox.Controls.Add(this.benHarrisonRadioButton);
             this.presGroupBox.Location = new System.Drawing.Point(0, 0);
             this.presGroupBox.Name = "presGroupBox";
-            this.presGroupBox.Size = new System.Drawing.Size(350, 223);
+            this.presGroupBox.Size = new System.Drawing.Size(437, 449);
             this.presGroupBox.TabIndex = 0;
             this.presGroupBox.TabStop = false;
             // 
@@ -404,74 +408,74 @@
             this.willMcKinleyTextBox.Size = new System.Drawing.Size(30, 20);
             this.willMcKinleyTextBox.TabIndex = 24;
             // 
-            // groupBox2
+            // filterGroupBox
             // 
-            this.groupBox2.Controls.Add(this.radioButton17);
-            this.groupBox2.Controls.Add(this.radioButton18);
-            this.groupBox2.Controls.Add(this.radioButton21);
-            this.groupBox2.Controls.Add(this.radioButton19);
-            this.groupBox2.Controls.Add(this.radioButton20);
-            this.groupBox2.Location = new System.Drawing.Point(226, 241);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(157, 165);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.filterGroupBox.Controls.Add(this.filterRepublicanRadioButton);
+            this.filterGroupBox.Controls.Add(this.filterDemRadioButton);
+            this.filterGroupBox.Controls.Add(this.filterAllRadioButton);
+            this.filterGroupBox.Controls.Add(this.filterDemRepublicanRadioButton);
+            this.filterGroupBox.Controls.Add(this.filterFederalistRadioButton);
+            this.filterGroupBox.Location = new System.Drawing.Point(226, 241);
+            this.filterGroupBox.Name = "filterGroupBox";
+            this.filterGroupBox.Size = new System.Drawing.Size(157, 165);
+            this.filterGroupBox.TabIndex = 1;
+            this.filterGroupBox.TabStop = false;
+            this.filterGroupBox.Text = "Filter";
             // 
-            // radioButton17
+            // filterRepublicanRadioButton
             // 
-            this.radioButton17.AutoSize = true;
-            this.radioButton17.Location = new System.Drawing.Point(36, 77);
-            this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(91, 17);
-            this.radioButton17.TabIndex = 36;
-            this.radioButton17.TabStop = true;
-            this.radioButton17.Text = "radioButton17";
-            this.radioButton17.UseVisualStyleBackColor = true;
+            this.filterRepublicanRadioButton.AutoSize = true;
+            this.filterRepublicanRadioButton.Location = new System.Drawing.Point(16, 77);
+            this.filterRepublicanRadioButton.Name = "filterRepublicanRadioButton";
+            this.filterRepublicanRadioButton.Size = new System.Drawing.Size(79, 17);
+            this.filterRepublicanRadioButton.TabIndex = 36;
+            this.filterRepublicanRadioButton.TabStop = true;
+            this.filterRepublicanRadioButton.Text = "Republican";
+            this.filterRepublicanRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton18
+            // filterDemRadioButton
             // 
-            this.radioButton18.AutoSize = true;
-            this.radioButton18.Location = new System.Drawing.Point(36, 54);
-            this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(91, 17);
-            this.radioButton18.TabIndex = 35;
-            this.radioButton18.TabStop = true;
-            this.radioButton18.Text = "radioButton18";
-            this.radioButton18.UseVisualStyleBackColor = true;
+            this.filterDemRadioButton.AutoSize = true;
+            this.filterDemRadioButton.Location = new System.Drawing.Point(16, 54);
+            this.filterDemRadioButton.Name = "filterDemRadioButton";
+            this.filterDemRadioButton.Size = new System.Drawing.Size(71, 17);
+            this.filterDemRadioButton.TabIndex = 35;
+            this.filterDemRadioButton.TabStop = true;
+            this.filterDemRadioButton.Text = "Democrat";
+            this.filterDemRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton19
+            // filterDemRepublicanRadioButton
             // 
-            this.radioButton19.AutoSize = true;
-            this.radioButton19.Location = new System.Drawing.Point(36, 100);
-            this.radioButton19.Name = "radioButton19";
-            this.radioButton19.Size = new System.Drawing.Size(91, 17);
-            this.radioButton19.TabIndex = 34;
-            this.radioButton19.TabStop = true;
-            this.radioButton19.Text = "radioButton19";
-            this.radioButton19.UseVisualStyleBackColor = true;
+            this.filterDemRepublicanRadioButton.AutoSize = true;
+            this.filterDemRepublicanRadioButton.Location = new System.Drawing.Point(16, 100);
+            this.filterDemRepublicanRadioButton.Name = "filterDemRepublicanRadioButton";
+            this.filterDemRepublicanRadioButton.Size = new System.Drawing.Size(136, 17);
+            this.filterDemRepublicanRadioButton.TabIndex = 34;
+            this.filterDemRepublicanRadioButton.TabStop = true;
+            this.filterDemRepublicanRadioButton.Text = "Democratic-Republican";
+            this.filterDemRepublicanRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton20
+            // filterFederalistRadioButton
             // 
-            this.radioButton20.AutoSize = true;
-            this.radioButton20.Location = new System.Drawing.Point(36, 123);
-            this.radioButton20.Name = "radioButton20";
-            this.radioButton20.Size = new System.Drawing.Size(91, 17);
-            this.radioButton20.TabIndex = 33;
-            this.radioButton20.TabStop = true;
-            this.radioButton20.Text = "radioButton20";
-            this.radioButton20.UseVisualStyleBackColor = true;
+            this.filterFederalistRadioButton.AutoSize = true;
+            this.filterFederalistRadioButton.Location = new System.Drawing.Point(16, 123);
+            this.filterFederalistRadioButton.Name = "filterFederalistRadioButton";
+            this.filterFederalistRadioButton.Size = new System.Drawing.Size(70, 17);
+            this.filterFederalistRadioButton.TabIndex = 33;
+            this.filterFederalistRadioButton.TabStop = true;
+            this.filterFederalistRadioButton.Text = "Federalist";
+            this.filterFederalistRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton21
+            // filterAllRadioButton
             // 
-            this.radioButton21.AutoSize = true;
-            this.radioButton21.Location = new System.Drawing.Point(36, 31);
-            this.radioButton21.Name = "radioButton21";
-            this.radioButton21.Size = new System.Drawing.Size(91, 17);
-            this.radioButton21.TabIndex = 32;
-            this.radioButton21.TabStop = true;
-            this.radioButton21.Text = "radioButton21";
-            this.radioButton21.UseVisualStyleBackColor = true;
+            this.filterAllRadioButton.AutoSize = true;
+            this.filterAllRadioButton.Location = new System.Drawing.Point(16, 31);
+            this.filterAllRadioButton.Name = "filterAllRadioButton";
+            this.filterAllRadioButton.Size = new System.Drawing.Size(36, 17);
+            this.filterAllRadioButton.TabIndex = 32;
+            this.filterAllRadioButton.TabStop = true;
+            this.filterAllRadioButton.Text = "All";
+            this.filterAllRadioButton.UseVisualStyleBackColor = true;
             // 
             // progressBar1
             // 
@@ -483,49 +487,58 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(434, 16);
+            this.webBrowser1.Location = new System.Drawing.Point(6, 14);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(651, 553);
+            this.webBrowser1.Size = new System.Drawing.Size(636, 486);
             this.webBrowser1.TabIndex = 4;
             // 
-            // label1
+            // presidentPictureBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(434, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "label1";
+            this.presidentPictureBox.Location = new System.Drawing.Point(36, 241);
+            this.presidentPictureBox.Name = "presidentPictureBox";
+            this.presidentPictureBox.Size = new System.Drawing.Size(143, 187);
+            this.presidentPictureBox.TabIndex = 6;
+            this.presidentPictureBox.TabStop = false;
             // 
-            // pictureBox1
+            // webBrowserGroupBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(36, 241);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(143, 187);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.webBrowserGroupBox.Controls.Add(this.webBrowser1);
+            this.webBrowserGroupBox.Location = new System.Drawing.Point(437, 0);
+            this.webBrowserGroupBox.Name = "webBrowserGroupBox";
+            this.webBrowserGroupBox.Size = new System.Drawing.Size(648, 506);
+            this.webBrowserGroupBox.TabIndex = 7;
+            this.webBrowserGroupBox.TabStop = false;
+            // 
+            // exitButton
+            // 
+            this.exitButton.Location = new System.Drawing.Point(975, 517);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(104, 47);
+            this.exitButton.TabIndex = 8;
+            this.exitButton.Text = "Exit";
+            this.exitButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1097, 610);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.webBrowserGroupBox);
+            this.Controls.Add(this.presidentPictureBox);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.filterGroupBox);
             this.Controls.Add(this.presGroupBox);
             this.Name = "Form1";
             this.Text = "Form1";
             this.presGroupBox.ResumeLayout(false);
             this.presGroupBox.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.filterGroupBox.ResumeLayout(false);
+            this.filterGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.presidentPictureBox)).EndInit();
+            this.webBrowserGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -564,16 +577,18 @@
         private System.Windows.Forms.RadioButton vanBurenRadioButton;
         private System.Windows.Forms.RadioButton jeffersonRadioButton;
         private System.Windows.Forms.RadioButton georgeWashingtonRadioButton;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton17;
-        private System.Windows.Forms.RadioButton radioButton18;
-        private System.Windows.Forms.RadioButton radioButton21;
-        private System.Windows.Forms.RadioButton radioButton19;
-        private System.Windows.Forms.RadioButton radioButton20;
+        private System.Windows.Forms.GroupBox filterGroupBox;
+        private System.Windows.Forms.RadioButton filterRepublicanRadioButton;
+        private System.Windows.Forms.RadioButton filterDemRadioButton;
+        private System.Windows.Forms.RadioButton filterAllRadioButton;
+        private System.Windows.Forms.RadioButton filterDemRepublicanRadioButton;
+        private System.Windows.Forms.RadioButton filterFederalistRadioButton;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox presidentPictureBox;
+        private System.Windows.Forms.GroupBox webBrowserGroupBox;
+        private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
