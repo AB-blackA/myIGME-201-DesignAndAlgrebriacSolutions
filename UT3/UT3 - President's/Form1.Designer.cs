@@ -74,10 +74,12 @@
             this.webBrowserGroupBox = new System.Windows.Forms.GroupBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.presGroupBox.SuspendLayout();
             this.filterGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.presidentPictureBox)).BeginInit();
             this.webBrowserGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // presGroupBox
@@ -519,6 +521,10 @@
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -538,6 +544,7 @@
             this.filterGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.presidentPictureBox)).EndInit();
             this.webBrowserGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -589,6 +596,7 @@
         private System.Windows.Forms.GroupBox webBrowserGroupBox;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
