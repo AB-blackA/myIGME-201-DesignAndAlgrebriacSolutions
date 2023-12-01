@@ -94,33 +94,81 @@ namespace UT3___President_s
 
         private void PresidentRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            // Code to handle PresidentRadioButton checked change
-            // Use sender to identify the selected RadioButton
-            // Update PictureBox and WebBrowser accordingly
+
+            if(sender.GetType() == typeof(RadioButton))
+            {
+                for(int r = 0; r < presidentInformation.GetLength(0); r++)
+                {
+    
+                    if(((RadioButton)sender).Text == presidentInformation[r, nameColumnIndex])
+                    {
+                    
+                        this.pictureBox1.Image = Image.FromFile(presidentInformation[r, ImageColumnIndex]);
+                        this.webBrowser1.Navigate(presidentInformation[r, WebPageColumnIndex]);
+                        
+                    }
+                }
+            }
+          
+            
         }
 
         private void FilterRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            // Code to handle FilterRadioButton checked change
-            // Show/hide relevant President RadioButtons and TextBoxes based on party affiliation
+            if(sender.GetType() == typeOf(RadioButton))
+            {
+            
+                string party = ((RadioButton)sender).Text;
+        
+                foreach (RadioButton rb in presidentRadioButtons)
+                {
+                    rb.Enabled = true;
+                }
+        
+                foreach (TextBox tb in presidentTextBoxes)
+                {
+                    tb.Enabled = true;
+                }
+        
+                for (int r = 0; r < presidentInformation.GetLength(0); r++)
+                {
+                
+                    if(presidentInformation[r, partyColumnIndex] != party)
+                    {
+                        presidentRadioButtons[r].Enabled = false;
+                        presidentTextBoxes[r].Enabled = false;
+                    }
+                }
+            }
+                
         }
 
         private void PresidentPictureBox_MouseHover(object sender, EventArgs e)
         {
-            // Code to handle PictureBox MouseHover
-            // Increase the size of PictureBox using pictureBoxScaleFactor
+            // Store the original size in the Tag property
+            if (pictureBox1.Tag == null)
+            {
+                pictureBox1.Tag = pictureBox1.Size;
+            }
+
+            // Increase the size on hover
+            pictureBox1.Size = new Size(pictureBox1.Width * pictureBoxScaleFactor, pictureBox1.Height pictureBoxScaleFactor);
         }
 
         private void PresidentPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            // Code to handle PictureBox MouseLeave
-            // Reset the size of PictureBox to its original size
+            if (pictureBox1.Tag != null)
+            {
+                pictureBox1.Size = pictureBox1.Size;
+            }
         }
 
         private void PresidentTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Code to handle PresidentTextBox text changed
-            // Focus on incorrect input, display error message, check for win, and start timer if necessary
+            if (pictureBox1.Tag != null)
+            {
+                pictureBox1.Size = (Size)pictureBox1.Tag;
+            }
         }
 
         private void FillArrays()
