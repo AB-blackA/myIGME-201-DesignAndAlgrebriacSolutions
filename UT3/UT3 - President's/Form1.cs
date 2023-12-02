@@ -3,24 +3,45 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
 
+/* Author: Andrew Black
+ * Class: Form1
+ * Purpose: Creation of a game where the user has to guess certain US President's Order (in way of election history)
+ * Limitations: Requires User to have an Internet connection to properly visit certain webpages
+ */
 namespace UT3___President_s
 {
+    /* Class: Form1
+     * Purpose: Form that holds all useful controls and data types for the exe
+     * Limitations: none
+     */
     public partial class Form1 : Form
     {
 
-        string[,] presidentInformation = new string[16, 5];
-        RadioButton[] presidentRadioButtons = new RadioButton[16];
-        TextBox[] presidentTextBoxes = new TextBox[16];
-        Timer timer;
-        bool timerStarted;
-        float pictureBoxScaleFactor = 1.5f;
+        //arrays for holding information related to president's (including name, order, jpg location, web page, and party affiliation)
+        //as well as for radioButtons and textBoxes
+        private string[,] presidentInformation = new string[16, 5];
+        private RadioButton[] presidentRadioButtons = new RadioButton[16];
+        private TextBox[] presidentTextBoxes = new TextBox[16];
 
+        //Timer and bool for it
+        private Timer timer;
+        private bool timerStarted;
+
+        //factor by which President picture will be scaled when scaled
+        private float pictureBoxScaleFactor = 2.5f;
+
+        //progressBar values
+        private const int ProgressBarMax = 120;
+        private int progressBarValue = ProgressBarMax;
+
+        //indexes for each president in presidentInformation
         public const byte BenHarrisonRowIndex = 0;
         public const byte FdrRowIndex = 1;
         public const byte BillClintonRowIndex = 2;
@@ -38,17 +59,36 @@ namespace UT3___President_s
         public const byte TeddyRooseveltRowIndex = 14;
         public const byte JeffersonRowIndex = 15;
 
+        //indexes for each column in presidentInformation
         public const byte NameColumnIndex = 0;
         public const byte ImageColumnIndex = 1;
         public const byte OrderColumnIndex = 2;
         public const byte WebPageColumnIndex = 3;
         public const byte PartyColumnIndex = 4;
 
+        //RadioButtons/TextBox for active of each group
+        private RadioButton activePresRB;
+        private RadioButton activeFilterRB;
+        private TextBox activeTB;
 
+        //variables for controlling functions of game depending on the state. Both need to be false to start.
+        //notably, gameStart needs to be false to start so certain starting methods run properly
+        private bool lockUser = false;
+        private bool gameStart = false;
+
+        //string of the winning url
+        private string winningUrl = "https://media.giphy.com/media/TmT51OyQLFD7a/giphy.gif";
+
+        /* Method: Form1
+         * Purpose: Construct the form, including EventHandler, starting states of certain controls, 
+         * and calling necessary methods for the game to run
+         * Limiations: none
+         */
         public Form1()
         {
             InitializeComponent();
 
+            //all president radio button CheckedChanged EventHandlers use the same method
             this.benHarrisonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
             this.fdrRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
             this.billClintonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
@@ -66,10 +106,11 @@ namespace UT3___President_s
             this.teddyRooseveltRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
             this.jeffersonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
 
+            //all president TextBox TextChanged EventHandlers use the same method
             this.benHarrisTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
             this.fdrTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
             this.billClintonTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.jamesBuchananRadioButton.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
+            this.jamesBuchananRadioButton.CheckedChanged += new EventHandler(PresidentTextBox_TextChanged);
             this.frankPierceTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
             this.georgeWBushTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
             this.obamaTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
@@ -83,28 +124,95 @@ namespace UT3___President_s
             this.teddyRooseveltTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
             this.jeffersonTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
 
+            //both presidentPictureBox MouseHover and MouseLeave use the same method for their EventHandler
             this.presidentPictureBox.MouseHover += new EventHandler(PresidentPictureBox_MouseHover);
             this.presidentPictureBox.MouseLeave += new EventHandler(PresidentPictureBox_MouseLeave);
 
+            //all filter RadioButtons CheckedChanged EventHandler use the same method
+            this.filterDemRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
+            this.filterRepublicanRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
+            this.filterFederalistRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
+            this.filterDemRepublicanRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
+            this.filterAllRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
+
+            //exitbutton EventHandler for leaving the game
+            this.exitButton.Click += new EventHandler(ExitButton_Click);
+
+            //initialize some aspects of some of the controls
+            this.presidentPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            this.exitButton.Enabled = false;
+            this.toolTip1.IsBalloon = true;
+
+            //call methods to start game
             FillArrays();
             TagPresidentsInTextBoxes();
+            ZeroPresidentTextBoxes();
+            SetPresidentTextBoxesHoverText();
+            ResetProgressBar();
+
+            SetActiveFilterRadioButton(this.filterAllRadioButton);
+            SetActivePresidentRadioButton(this.benHarrisonRadioButton);
+
+            //start game
+            gameStart = true;
 
 
         }
 
+        /* Method: ExitButton_Click
+         * Purpose: Exit the Application
+         * Limiations: none
+         */
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        /* Delegate Method: PresidentRadioButton_CheckedChange
+         * Purpose: Accept a President RadioButton EventHandler and change aspects of the form based on it
+         * Limitations: none
+         */
         private void PresidentRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            //do nothing if game hasn't started yet
+            if (!gameStart)
+            {
+                return;
+            }
 
+            //ensure proper object type
             if(sender.GetType() == typeof(RadioButton))
             {
-                for(int r = 0; r < presidentInformation.GetLength(0); r++)
+
+                RadioButton radioButton = (RadioButton)sender;
+
+                //if the user is locked and this radioButton isn't the active one, uncheck this RadioButton and Check the Active
+                if (lockUser && radioButton != activePresRB)
+                {
+                    radioButton.Checked = false;
+                    activePresRB.Checked = true;
+                    return;
+                }
+                //otherwise, if locked and this is the active, return to prevent webpage from reloading 
+                else if (lockUser)
+                {
+                    return;
+                }
+
+                //if not locked, set this radiobutton as the activePresRB
+                SetActivePresidentRadioButton(radioButton);
+
+                //find where this president's column is in presidentInformation based on this RadioButton's text
+                //when found, change the picture, webpage, and webBrowserGroupBox to reflect aspects of President
+                for (int r = 0; r < presidentInformation.GetLength(0); r++)
                 {
     
-                    if(((RadioButton)sender).Text == presidentInformation[r, nameColumnIndex])
+                    if(radioButton.Text == presidentInformation[r, NameColumnIndex])
                     {
-                    
-                        this.pictureBox1.Image = Image.FromFile(presidentInformation[r, ImageColumnIndex]);
+                        
+                        this.presidentPictureBox.Image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, presidentInformation[r, ImageColumnIndex]));
                         this.webBrowser1.Navigate(presidentInformation[r, WebPageColumnIndex]);
+                        this.webBrowserGroupBox.Text = presidentInformation[r, WebPageColumnIndex];
                         
                     }
                 }
@@ -113,64 +221,211 @@ namespace UT3___President_s
             
         }
 
+        /* Delegate Method: FilterRadioButton_CheckedChanged
+         * Purpose: Accept a Filter RadioButton's CheckedChanged EventHandler and change aspects of the form based on it
+         * Limitations: none
+         */
         private void FilterRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if(sender.GetType() == typeOf(RadioButton))
+            //do nothing if game hasn't started
+            if (!gameStart)
             {
-            
-                string party = ((RadioButton)sender).Text;
-        
-                foreach (RadioButton rb in presidentRadioButtons)
+                return;
+            }
+
+            //ensure sender is of proper type
+            if (sender.GetType() == typeof(RadioButton))
+            {
+
+
+                RadioButton radioButton = (RadioButton)sender;
+
+                //if the user is locked and this RadioButton isn't the activeFilterRB, uncheck this RadioButton and check
+                //the active one to prevent the active one from being hidden
+                if (lockUser && radioButton != activeFilterRB)
                 {
-                    rb.Enabled = true;
+                    radioButton.Checked = false;
+                    activeFilterRB.Checked = true;
+                    return;
                 }
-        
-                foreach (TextBox tb in presidentTextBoxes)
-                {
-                    tb.Enabled = true;
-                }
-        
-                for (int r = 0; r < presidentInformation.GetLength(0); r++)
-                {
+
+                //set active this RadioButton as the activeFilterRB
+                SetActiveFilterRadioButton(radioButton);
+
+                //get the party from the RadioButton via its Text
+                string party = radioButton.Text;
+
                 
-                    if(presidentInformation[r, partyColumnIndex] != party)
+                //if party isn't All, set visible only the ones with party affiliation matching string party
+                if (party != "All")
+                {
+                    //loop through the presidentInformation partyColumn for each president
+                    for (int r = 0; r < presidentInformation.GetLength(0); r++)
                     {
-                        presidentRadioButtons[r].Enabled = false;
-                        presidentTextBoxes[r].Enabled = false;
+
+                        //if party isn't a match, find that president's RadioButton and TextBox in their respective
+                        //arrays and set visibility to false.
+                        if (presidentInformation[r, PartyColumnIndex] != party)
+                        {
+                            
+                            presidentRadioButtons[r].Visible = false;
+                            presidentTextBoxes[r].Visible = false;
+
+                        }
+                        //else, set visibility to true
+                        else
+                        {
+                            presidentRadioButtons[r].Visible = true;
+                            presidentTextBoxes[r].Visible = true;
+                        }
+                    }
+                }
+                //if string party is "All", set visible all RadioButton's and TextBoxes
+                else
+                {
+                    foreach (RadioButton rb in presidentRadioButtons)
+                    {
+                        rb.Visible = true;
+                    }
+
+                    foreach (TextBox tb in presidentTextBoxes)
+                    {
+                        tb.Visible = true;
                     }
                 }
             }
                 
         }
 
+        /* Delegate Method: PresidentPictureBox_MouseHover
+         * Purpose: Accepts PresidentPictureBox's MouseHover EventHandler and enlarges the current president's image
+         * Limiations: none
+         */
         private void PresidentPictureBox_MouseHover(object sender, EventArgs e)
         {
-            // Store the original size in the Tag property
-            if (pictureBox1.Tag == null)
+            //store original size of presidentPictureBox in its Tag property if it's not null
+            if (presidentPictureBox.Tag == null)
             {
-                pictureBox1.Tag = pictureBox1.Size;
+                presidentPictureBox.Tag = presidentPictureBox.Size;
             }
 
-            // Increase the size on hover
-            pictureBox1.Size = new Size(pictureBox1.Width * pictureBoxScaleFactor, pictureBox1.Height pictureBoxScaleFactor);
+            //Increase it's size
+            presidentPictureBox.Size = new Size((int)(presidentPictureBox.Width * pictureBoxScaleFactor), (int)(presidentPictureBox.Height * pictureBoxScaleFactor));
         }
 
+        /* Delegate Method: PresidentPictureBox_MouseLeave
+         * Purpose: Accepts PresidentPictureBox's MouseLeave EventHandler and resets the current president's image size
+         * Limiations: none
+         */
         private void PresidentPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            if (pictureBox1.Tag != null)
+            //check if the tag of the presidentPictureBox isn't empty. If so, that means it was once enlarged and has a Size property
+            //containing information for its original size in it. Then, set the picturebox's size to that
+            if (presidentPictureBox.Tag != null)
             {
-                pictureBox1.Size = pictureBox1.Size;
+                presidentPictureBox.Size = (Size)presidentPictureBox.Tag;
+                presidentPictureBox.Tag = null;
             }
         }
 
+        /* Delegate Method: PresidentTextBox_TextChanged
+         * Purpose: Accept's President TextBox's TextChanged EventHandler and uses that information to determine if the user
+         * has entered a value correct to that President's correct order in Presidency. Depending on result, affect the game
+         * Limitations: none
+         */
         private void PresidentTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (pictureBox1.Tag != null)
+
+            //do nothing if game hasn't started yet
+            if (!gameStart)
             {
-                pictureBox1.Size = (Size)pictureBox1.Tag;
+                return;
+            }
+
+            //ensure proper sender
+            if (sender.GetType() == typeof(TextBox))
+            {
+
+                //start the timer if it's not started yet. StartTimer() will set timerStarted = true
+                if (!timerStarted)
+                {
+                    StartTimer();
+                }
+
+                //cast sender as textbox
+                TextBox tb = (TextBox)sender;
+
+                //if the user isn't locked, set this textbox as the active one
+                if (!lockUser)
+                {
+                    SetActiveTextBox(tb);
+                }
+
+                //if the user is locked and this textbox isn't the active one, do nothing and return
+                if (lockUser && tb != activeTB)
+                {
+                    return;
+                }
+
+
+                //find the index of this textbox's President 
+                int presidentIndex = 0;
+
+                for (int i = 0; i < presidentInformation.GetLength(0); i++)
+                {
+                    //recall we set each TextBox to hold the RadioButton of its related president in its Tag
+                    if (presidentInformation[i, 0] == ((RadioButton)tb.Tag).Text)
+                    {
+                        presidentIndex = i;
+                    }
+                }
+
+                //try catch to ensure tb.Text is only digits. If not, remove none-digits
+                try
+                {
+                    tb.Text = (Int32.Parse(tb.Text)).ToString();
+                }
+                catch
+                {
+
+                    string digitsOnly = "";
+
+                    foreach(Char c in tb.Text)
+                    {
+                        if (Char.IsDigit(c))
+                        {
+                            digitsOnly += "" + c;
+                        }
+                    }
+
+                    tb.Text = digitsOnly;
+                }
+
+                
+
+                //if the user entered in the wrong answer, disable other controls, set out errorProvider on tb and inform of wrong answer,
+                //and lock user
+                if (tb.Text != presidentInformation[presidentIndex, OrderColumnIndex])
+                {
+                    this.errorProvider1.SetError(tb, "That is the wrong answer");
+                    lockUser = true;
+                    DisableOtherControls();
+                }
+                //otherwise, do the opposite and check for a win
+                else
+                {
+                    this.errorProvider1.Clear();
+                    lockUser = false;
+                    EnableOtherControls();
+                    CheckForWin();
+                }
             }
         }
 
+        /* Help Method: FillArrays
+         * Purpose: Call all Methods that FillArrays (for decluttering)
+         * Limitations: none
+         */
         private void FillArrays()
         {
             FillPresidentInformation();
@@ -179,13 +434,19 @@ namespace UT3___President_s
             TagPresidentsInTextBoxes();
         }
 
+        /* Method: FillPresidentInformation
+         * Purpose: Fills the array presidentInformation
+         * Limitations: none
+         */
         private void FillPresidentInformation()
         {
+            //fill each row, column by column
             for(int r = 0; r < presidentInformation.GetLength(0); r++)
             {
                 for(int c = 0; c < presidentInformation.GetLength(1); c++)
                 {
 
+                    //based on value of r and c, fill in array corresponding to president's Name, Image, Order, WebPage, and Party
                     if (r == BenHarrisonRowIndex)
                     {
                         switch (c)
@@ -195,7 +456,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "BenjaminHarrison.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -203,7 +464,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/George_Washington";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Benjamin_Harrison";
                                 break;
 
                             case PartyColumnIndex:
@@ -211,7 +472,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+                                
                                 break;
                         }
                     }
@@ -224,7 +485,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "FranklinDRoosevelt.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -232,7 +493,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Franklin_D._Roosevelt";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Franklin_D._Roosevelt";
                                 break;
 
                             case PartyColumnIndex:
@@ -240,7 +501,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+                                
                                 break;
                         }
                     }
@@ -253,7 +514,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] =  "WilliamJClinton.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -261,7 +522,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Bill_Clinton";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Bill_Clinton";
                                 break;
 
                             case PartyColumnIndex:
@@ -269,7 +530,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -282,7 +543,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "JamesBuchanan.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -290,7 +551,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/James_Buchanan";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/James_Buchanan";
                                 break;
 
                             case PartyColumnIndex:
@@ -298,7 +559,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -311,7 +572,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "FranklinPierce.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -319,7 +580,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Franklin_Pierce";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Franklin_Pierce";
                                 break;
 
                             case PartyColumnIndex:
@@ -327,7 +588,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+                                
                                 break;
                         }
                     }
@@ -340,7 +601,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "GeorgeWBush.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -348,7 +609,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/George_W._Bush";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/George_W._Bush";
                                 break;
 
                             case PartyColumnIndex:
@@ -356,7 +617,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+                                
                                 break;
                         }
                     }
@@ -369,7 +630,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "BarackObama.png";
                                 break;
 
                             case OrderColumnIndex:
@@ -377,7 +638,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Barack_Obama";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Barack_Obama";
                                 break;
 
                             case PartyColumnIndex:
@@ -385,7 +646,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+                                
                                 break;
                         }
                     }
@@ -398,7 +659,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "JohnFKennedy.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -406,7 +667,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/John_F._Kennedy";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/John_F._Kennedy";
                                 break;
 
                             case PartyColumnIndex:
@@ -414,7 +675,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+                               
                                 break;
                         }
                     }
@@ -427,7 +688,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "WilliamMcKinley.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -435,7 +696,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/William_McKinley";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/William_McKinley";
                                 break;
 
                             case PartyColumnIndex:
@@ -443,7 +704,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -456,7 +717,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "RonaldReagan.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -464,7 +725,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Ronald_Reagan";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Ronald_Reagan";
                                 break;
 
                             case PartyColumnIndex:
@@ -472,7 +733,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -485,7 +746,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "DwightDEisenhower.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -493,7 +754,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Dwight_D._Eisenhower";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Dwight_D._Eisenhower";
                                 break;
 
                             case PartyColumnIndex:
@@ -501,7 +762,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -514,7 +775,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "MartinVanBuren.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -522,7 +783,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Martin_Van_Buren";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Martin_Van_Buren";
                                 break;
 
                             case PartyColumnIndex:
@@ -530,7 +791,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -543,7 +804,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "GeorgeWashington.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -551,7 +812,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/George_Washington";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/George_Washington";
                                 break;
 
                             case PartyColumnIndex:
@@ -559,7 +820,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -572,7 +833,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "JohnAdams.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -580,7 +841,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/John_Adams";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/John_Adams";
                                 break;
 
                             case PartyColumnIndex:
@@ -588,7 +849,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -601,7 +862,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "TheodoreRoosevelt.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -609,7 +870,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Theodore_Roosevelt";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Theodore_Roosevelt";
                                 break;
 
                             case PartyColumnIndex:
@@ -617,7 +878,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
@@ -630,7 +891,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                // Code for handling the Image column
+                                presidentInformation[r, c] = "ThomasJefferson.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -638,7 +899,7 @@ namespace UT3___President_s
                                 break;
 
                             case WebPageColumnIndex:
-                                presidentInformation[r, c] = "https://en.wikipedia.org/wiki/Thomas_Jefferson";
+                                presidentInformation[r, c] = "https://en.m.wikipedia.org/wiki/Thomas_Jefferson";
                                 break;
 
                             case PartyColumnIndex:
@@ -646,10 +907,12 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                // Code for handling cases where c doesn't match any constant
+
                                 break;
                         }
                     }
+
+                    //if somehow we go outside of bounds, inform (testing purposes)
                     else
                     {
                         MessageBox.Show(r + " isn't a valid index");
@@ -662,6 +925,10 @@ namespace UT3___President_s
             }
         }
 
+        /* Method: FillPresidentRadioButtons
+         * Purpose: Fill presidentRadioButtons array manually for all RadioButton's related to presidents
+         * Limitations: none
+         */
         private void FillPresidentRadioButtons()
         {
             presidentRadioButtons[0] = this.benHarrisonRadioButton;
@@ -682,6 +949,10 @@ namespace UT3___President_s
             presidentRadioButtons[15] = this.jeffersonRadioButton;
         }
 
+        /* Method: FillPresidentTextButtons
+         * Purpose: Fill presidentTextButtons array manually for all TextBox's related to presidents
+         * Limitations: none
+         */
         private void FillPresidentTextBoxes()
         {
             presidentTextBoxes[0] = this.benHarrisTextBox;
@@ -702,6 +973,10 @@ namespace UT3___President_s
             presidentTextBoxes[15] = this.jeffersonTextBox;
         }
 
+        /* Method: TagPresidentsInTextButtons
+         * Purpose: Set the Tag of each PresidentTextBox to hold its pairing PresidentRadioButton
+         * Limitations: none
+         */
         private void TagPresidentsInTextBoxes()
         {
             benHarrisTextBox.Tag = benHarrisonRadioButton;
@@ -722,8 +997,35 @@ namespace UT3___President_s
             jeffersonTextBox.Tag = jeffersonRadioButton;
         }
 
+        /* Method: ZeroPresidentTextBoxes
+         * Purpose: Set the intial Text of all President TextBox's to zero
+         * Limitations: none
+         */
+        private void ZeroPresidentTextBoxes()
+        {
+            //loop through presidentTextBoxes and zero each one's Text
+            try
+            {
+                foreach(TextBox tb in presidentTextBoxes)
+                {
+                    tb.Text = "0";
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Error. Can't ZeroPresidentTextBoxes");
+            }
+        }
+
+        /* Method: StartTimer
+         * Purpose: Starts the timer and changes any other relevant information related to it
+         * Limitations: none
+         */
         private void StartTimer()
         {
+
+            //create new timer, set interval to one second, create Timer_Tick delegate handler, Start timer, and change
+            //value of timerStarted = true
             timer = new Timer();
             timer.Interval = 1000;
             timer.Tick += Timer_Tick;
@@ -731,21 +1033,147 @@ namespace UT3___President_s
             timerStarted = true;
         }
 
+        /* Delagte Method: Timer_Tick
+         * Purpose: Handle's the Tick event of Timer (every one second is called)
+         * Limitations: none
+         */
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // Code to handle each tick of the timer
-            // Update progressBar1 and check for timeout
+
+            //set the progressBar1.Value -= 1, then if it's zero call TimeOut
+            this.progressBar1.Value -= 1;
+            if(this.progressBar1.Value <= 0)
+            {
+                TimeOut();
+            }
         }
 
+        /* Method: TimeOut
+         * Purpose: Reset the Game in the event the user ran out of time
+         * Limitations: none
+         */
         private void TimeOut()
         {
-            // Code to reset the game upon timeout
-            // Reset progressBar1, set timerStarted to false, and reset PresidentTextBox values
+            //unlock user and "unstart" the game
+            gameStart = false;
+            lockUser = false;
+
+            //call some methods that need resetting
+            ResetProgressBar();
+            ZeroPresidentTextBoxes();
+
+            //stop the timer and set bool to false
+            timer.Stop();
+            timerStarted = false;
+
+            //clear any errors
+            this.errorProvider1.Clear();
+
+            //enable all controls then start the game
+            EnableOtherControls();
+            gameStart = true;
         }
 
-        private void progressBar1_Click(object sender, EventArgs e)
+        /* Method: ResetProgressBar
+         * Purpose: Reset's the Value of the progressBar to the maximum when called
+         * Limitations: none
+         */
+        private void ResetProgressBar()
         {
 
+            this.progressBar1.Maximum = ProgressBarMax;
+            this.progressBar1.Value = progressBarValue;
         }
+
+        /* Method: SetActiveTextBox
+         * Purpose: Accept a TextBox and set it to the activeTB
+         * Limitations: none
+         */
+        private void SetActiveTextBox(TextBox textBox)
+        {
+            this.activeTB = textBox;
+        }
+
+        /* Method: SetActivePresidentRadioButton
+         * Purpose: Accept a RadioButton and set it to the activePresRB
+         * Limitations: none
+         */
+        private void SetActivePresidentRadioButton(RadioButton radioButton)
+        {
+            this.activePresRB = radioButton;
+        }
+
+        /* Method: SetActiveFilterRadioButton
+         * Purpose: Accept a RadioButton and set it to the activeFilterRB
+         * Limitations: none
+         */
+        private void SetActiveFilterRadioButton(RadioButton radioButton)
+        {
+            this.activeFilterRB = radioButton;
+        }
+
+        private void SetPresidentTextBoxesHoverText()
+        {
+            foreach(TextBox tb in presidentTextBoxes)
+            {
+                this.toolTip1.SetToolTip(tb, "Which # President?");
+                
+            }
+        }
+
+        /* Method: DisableOtherControls
+         * Purpose: Disables "all" controls (by setting TextBox's to ReadOnly. Nothing else is disabled
+         * Limitations: none
+         */
+        private void DisableOtherControls()
+        {
+            foreach (TextBox tb in presidentTextBoxes)
+            {
+                if(tb != activeTB)
+                {
+                    tb.ReadOnly = true;
+                }
+            }
+        }
+
+        /* Method: EnableOtherControls
+         * Purpose: Enables "all" controls (only TextBox's would be disabled) by setting all TextBox's to ReadOnly = false
+         * Limitations: none
+         */
+        private void EnableOtherControls()
+        {
+            foreach (TextBox tb in presidentTextBoxes)
+            {
+                tb.ReadOnly = false;
+            }
+        }
+
+        /* Method: CheckForWin
+         * Purpose: Checks if the User has Won. If so, congratulate them and stop the game!
+         * Limitations: none
+         */
+        private void CheckForWin()
+        {
+
+            //loop through each presidentTextBoxes and check if each president's TextBox ISN'T the same as the value in presidentInformation
+            //if any of them are off, do nothing and return
+            for (int i = 0; i < presidentTextBoxes.Length; i++)
+            {
+                if (!(presidentTextBoxes[i].Text == presidentInformation[i, OrderColumnIndex]))
+                {
+                    return;
+                }
+            }
+
+            //if we don't return, the user has won! "unstart" the game, enable the exitButton, display the winningURL, and stop the timer!
+            gameStart = false;
+            this.exitButton.Enabled = true;
+            this.webBrowser1.Navigate(winningUrl);
+            timer1.Stop();
+        }
+
+       
+
+        
     }
 }
