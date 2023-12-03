@@ -14,6 +14,7 @@ using System.Windows.Forms;
  */
 
 /* Form Controls:
+ * Form to hold controls
  * RichTextBox for user to enter Resume
  * SubmitButton for submitting finalized application
  */

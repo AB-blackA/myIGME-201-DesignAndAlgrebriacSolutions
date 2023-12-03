@@ -14,6 +14,7 @@ using System.Windows.Forms;
  */
 
 /* Form Controls:
+ * Form to hold controls
  * RichTextField to display info to user
  * ContinueButton to "allow" user to continue
  * Six CheckBoxes representing Programming Fields

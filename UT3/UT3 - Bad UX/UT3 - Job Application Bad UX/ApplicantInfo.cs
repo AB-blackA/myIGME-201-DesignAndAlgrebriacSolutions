@@ -15,6 +15,7 @@ using System.Windows.Forms;
  */
 
 /* Form Controls
+ * Form to hold controls
  * RichTextField to display information about form
  * ContinueButton for submission of this form
  * Five TextBoxes for User Application Information (First + Last Name, Street Address,
