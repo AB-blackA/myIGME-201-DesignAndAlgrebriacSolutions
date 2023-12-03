@@ -50,12 +50,14 @@
             this.fiveSevenRadioButtonGroupBox = new System.Windows.Forms.GroupBox();
             this.eightNineRadioButtonGroupBox = new System.Windows.Forms.GroupBox();
             this.threeFourRadioButtonGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxGroupBox.SuspendLayout();
             this.zeroRadioButtonGroupBox.SuspendLayout();
             this.oneTwoRadioButtonGroupBox.SuspendLayout();
             this.fiveSevenRadioButtonGroupBox.SuspendLayout();
             this.eightNineRadioButtonGroupBox.SuspendLayout();
             this.threeFourRadioButtonGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxGroupBox
@@ -154,7 +156,7 @@
             // zeroRadioButton
             // 
             this.zeroRadioButton.AutoSize = true;
-            this.zeroRadioButton.Location = new System.Drawing.Point(8, 11);
+            this.zeroRadioButton.Location = new System.Drawing.Point(5, 11);
             this.zeroRadioButton.Name = "zeroRadioButton";
             this.zeroRadioButton.Size = new System.Drawing.Size(31, 17);
             this.zeroRadioButton.TabIndex = 0;
@@ -176,7 +178,7 @@
             // threeFourRadioButton
             // 
             this.threeFourRadioButton.AutoSize = true;
-            this.threeFourRadioButton.Location = new System.Drawing.Point(6, 14);
+            this.threeFourRadioButton.Location = new System.Drawing.Point(5, 14);
             this.threeFourRadioButton.Name = "threeFourRadioButton";
             this.threeFourRadioButton.Size = new System.Drawing.Size(40, 17);
             this.threeFourRadioButton.TabIndex = 2;
@@ -209,7 +211,7 @@
             // tenPlusRadioButton
             // 
             this.tenPlusRadioButton.AutoSize = true;
-            this.tenPlusRadioButton.Location = new System.Drawing.Point(223, 155);
+            this.tenPlusRadioButton.Location = new System.Drawing.Point(6, 158);
             this.tenPlusRadioButton.Name = "tenPlusRadioButton";
             this.tenPlusRadioButton.Size = new System.Drawing.Size(43, 17);
             this.tenPlusRadioButton.TabIndex = 5;
@@ -220,7 +222,7 @@
             // radioButtonLabel
             // 
             this.radioButtonLabel.AutoSize = true;
-            this.radioButtonLabel.Location = new System.Drawing.Point(221, 13);
+            this.radioButtonLabel.Location = new System.Drawing.Point(6, 16);
             this.radioButtonLabel.Name = "radioButtonLabel";
             this.radioButtonLabel.Size = new System.Drawing.Size(248, 13);
             this.radioButtonLabel.TabIndex = 6;
@@ -237,66 +239,74 @@
             // zeroRadioButtonGroupBox
             // 
             this.zeroRadioButtonGroupBox.Controls.Add(this.zeroRadioButton);
-            this.zeroRadioButtonGroupBox.Location = new System.Drawing.Point(216, 29);
+            this.zeroRadioButtonGroupBox.Location = new System.Drawing.Point(1, 32);
             this.zeroRadioButtonGroupBox.Name = "zeroRadioButtonGroupBox";
-            this.zeroRadioButtonGroupBox.Size = new System.Drawing.Size(200, 31);
+            this.zeroRadioButtonGroupBox.Size = new System.Drawing.Size(206, 31);
             this.zeroRadioButtonGroupBox.TabIndex = 8;
             this.zeroRadioButtonGroupBox.TabStop = false;
             // 
             // oneTwoRadioButtonGroupBox
             // 
             this.oneTwoRadioButtonGroupBox.Controls.Add(this.oneTwoRadioButton);
-            this.oneTwoRadioButtonGroupBox.Location = new System.Drawing.Point(217, 52);
+            this.oneTwoRadioButtonGroupBox.Location = new System.Drawing.Point(0, 55);
             this.oneTwoRadioButtonGroupBox.Name = "oneTwoRadioButtonGroupBox";
-            this.oneTwoRadioButtonGroupBox.Size = new System.Drawing.Size(200, 31);
+            this.oneTwoRadioButtonGroupBox.Size = new System.Drawing.Size(207, 31);
             this.oneTwoRadioButtonGroupBox.TabIndex = 9;
             this.oneTwoRadioButtonGroupBox.TabStop = false;
             // 
             // fiveSevenRadioButtonGroupBox
             // 
             this.fiveSevenRadioButtonGroupBox.Controls.Add(this.fiveSevenRadioButton);
-            this.fiveSevenRadioButtonGroupBox.Location = new System.Drawing.Point(217, 98);
+            this.fiveSevenRadioButtonGroupBox.Location = new System.Drawing.Point(0, 101);
             this.fiveSevenRadioButtonGroupBox.Name = "fiveSevenRadioButtonGroupBox";
-            this.fiveSevenRadioButtonGroupBox.Size = new System.Drawing.Size(200, 31);
+            this.fiveSevenRadioButtonGroupBox.Size = new System.Drawing.Size(207, 31);
             this.fiveSevenRadioButtonGroupBox.TabIndex = 9;
             this.fiveSevenRadioButtonGroupBox.TabStop = false;
             // 
             // eightNineRadioButtonGroupBox
             // 
             this.eightNineRadioButtonGroupBox.Controls.Add(this.eightNineRadioButton);
-            this.eightNineRadioButtonGroupBox.Location = new System.Drawing.Point(217, 120);
+            this.eightNineRadioButtonGroupBox.Location = new System.Drawing.Point(0, 123);
             this.eightNineRadioButtonGroupBox.Name = "eightNineRadioButtonGroupBox";
-            this.eightNineRadioButtonGroupBox.Size = new System.Drawing.Size(200, 31);
+            this.eightNineRadioButtonGroupBox.Size = new System.Drawing.Size(207, 31);
             this.eightNineRadioButtonGroupBox.TabIndex = 9;
             this.eightNineRadioButtonGroupBox.TabStop = false;
             // 
             // threeFourRadioButtonGroupBox
             // 
             this.threeFourRadioButtonGroupBox.Controls.Add(this.threeFourRadioButton);
-            this.threeFourRadioButtonGroupBox.Location = new System.Drawing.Point(217, 75);
+            this.threeFourRadioButtonGroupBox.Location = new System.Drawing.Point(1, 78);
             this.threeFourRadioButtonGroupBox.Name = "threeFourRadioButtonGroupBox";
-            this.threeFourRadioButtonGroupBox.Size = new System.Drawing.Size(200, 31);
+            this.threeFourRadioButtonGroupBox.Size = new System.Drawing.Size(206, 31);
             this.threeFourRadioButtonGroupBox.TabIndex = 9;
             this.threeFourRadioButtonGroupBox.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.zeroRadioButtonGroupBox);
+            this.groupBox1.Controls.Add(this.oneTwoRadioButtonGroupBox);
+            this.groupBox1.Controls.Add(this.threeFourRadioButtonGroupBox);
+            this.groupBox1.Controls.Add(this.fiveSevenRadioButtonGroupBox);
+            this.groupBox1.Controls.Add(this.radioButtonLabel);
+            this.groupBox1.Controls.Add(this.tenPlusRadioButton);
+            this.groupBox1.Controls.Add(this.eightNineRadioButtonGroupBox);
+            this.groupBox1.Location = new System.Drawing.Point(214, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(207, 187);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
             // 
             // ApplicantQualities
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 450);
-            this.Controls.Add(this.tenPlusRadioButton);
-            this.Controls.Add(this.zeroRadioButtonGroupBox);
-            this.Controls.Add(this.oneTwoRadioButtonGroupBox);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.radioButtonLabel);
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.checkBoxGroupBox);
-            this.Controls.Add(this.threeFourRadioButtonGroupBox);
-            this.Controls.Add(this.fiveSevenRadioButtonGroupBox);
-            this.Controls.Add(this.eightNineRadioButtonGroupBox);
             this.Name = "ApplicantQualities";
             this.Text = "Application - Qualifications";
-            this.Load += new System.EventHandler(this.ApplicantQualities_Load);
             this.checkBoxGroupBox.ResumeLayout(false);
             this.checkBoxGroupBox.PerformLayout();
             this.zeroRadioButtonGroupBox.ResumeLayout(false);
@@ -309,8 +319,9 @@
             this.eightNineRadioButtonGroupBox.PerformLayout();
             this.threeFourRadioButtonGroupBox.ResumeLayout(false);
             this.threeFourRadioButtonGroupBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -338,5 +349,6 @@
         private System.Windows.Forms.GroupBox fiveSevenRadioButtonGroupBox;
         private System.Windows.Forms.GroupBox eightNineRadioButtonGroupBox;
         private System.Windows.Forms.GroupBox threeFourRadioButtonGroupBox;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

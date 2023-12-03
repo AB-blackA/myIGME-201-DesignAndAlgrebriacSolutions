@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.submitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -40,21 +40,21 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // button1
+            // submitButton
             // 
-            this.button1.Location = new System.Drawing.Point(289, 350);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(230, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Submit Application";
-            this.button1.UseVisualStyleBackColor = true;
+            this.submitButton.Location = new System.Drawing.Point(289, 350);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(230, 23);
+            this.submitButton.TabIndex = 1;
+            this.submitButton.Text = "Submit Application";
+            this.submitButton.UseVisualStyleBackColor = true;
             // 
             // ApplicantResume
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.submitButton);
             this.Controls.Add(this.richTextBox1);
             this.Name = "ApplicantResume";
             this.Text = "Application - Resume";
@@ -65,6 +65,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button submitButton;
     }
 }
