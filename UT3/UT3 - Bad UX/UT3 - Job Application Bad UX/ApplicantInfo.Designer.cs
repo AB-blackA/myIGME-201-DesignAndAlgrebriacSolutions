@@ -1,6 +1,6 @@
 ﻿namespace UT3___Job_Application_Bad_UX
 {
-    partial class Form1
+    partial class ApplicantInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicantInfo));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.firstNameLabel = new System.Windows.Forms.Label();
-            this.lastNameLabel = new System.Windows.Forms.Label();
-            this.streetLabel = new System.Windows.Forms.Label();
-            this.stateLabel = new System.Windows.Forms.Label();
-            this.zipCodeLabel = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lastNameTextBox = new System.Windows.Forms.TextBox();
-            this.streetAddressTextBox = new System.Windows.Forms.TextBox();
-            this.stateTextBox = new System.Windows.Forms.TextBox();
             this.zipCodeTextBox = new System.Windows.Forms.TextBox();
+            this.stateTextBox = new System.Windows.Forms.TextBox();
+            this.streetAddressTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.zipCodeLabel = new System.Windows.Forms.Label();
+            this.stateLabel = new System.Windows.Forms.Label();
+            this.streetLabel = new System.Windows.Forms.Label();
+            this.lastNameLabel = new System.Windows.Forms.Label();
+            this.firstNameLabel = new System.Windows.Forms.Label();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.continueButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.resetTBLocationsButton = new System.Windows.Forms.Button();
@@ -65,48 +66,41 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // firstNameTextBox
+            // zipCodeTextBox
             // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(154, 20);
-            this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.firstNameTextBox.TabIndex = 0;
+            this.zipCodeTextBox.Location = new System.Drawing.Point(154, 124);
+            this.zipCodeTextBox.Name = "zipCodeTextBox";
+            this.zipCodeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.zipCodeTextBox.TabIndex = 10;
             // 
-            // firstNameLabel
+            // stateTextBox
             // 
-            this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Location = new System.Drawing.Point(34, 27);
-            this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(57, 13);
-            this.firstNameLabel.TabIndex = 1;
-            this.firstNameLabel.Text = "First Name";
+            this.stateTextBox.Location = new System.Drawing.Point(154, 98);
+            this.stateTextBox.Name = "stateTextBox";
+            this.stateTextBox.Size = new System.Drawing.Size(100, 20);
+            this.stateTextBox.TabIndex = 9;
             // 
-            // lastNameLabel
+            // streetAddressTextBox
             // 
-            this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(34, 50);
-            this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(58, 13);
-            this.lastNameLabel.TabIndex = 2;
-            this.lastNameLabel.Text = "Last Name";
+            this.streetAddressTextBox.Location = new System.Drawing.Point(154, 72);
+            this.streetAddressTextBox.Name = "streetAddressTextBox";
+            this.streetAddressTextBox.Size = new System.Drawing.Size(100, 20);
+            this.streetAddressTextBox.TabIndex = 8;
             // 
-            // streetLabel
+            // lastNameTextBox
             // 
-            this.streetLabel.AutoSize = true;
-            this.streetLabel.Location = new System.Drawing.Point(34, 72);
-            this.streetLabel.Name = "streetLabel";
-            this.streetLabel.Size = new System.Drawing.Size(76, 13);
-            this.streetLabel.TabIndex = 3;
-            this.streetLabel.Text = "Street Address";
+            this.lastNameTextBox.Location = new System.Drawing.Point(154, 46);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.lastNameTextBox.TabIndex = 7;
             // 
-            // stateLabel
+            // label6
             // 
-            this.stateLabel.AutoSize = true;
-            this.stateLabel.Location = new System.Drawing.Point(34, 97);
-            this.stateLabel.Name = "stateLabel";
-            this.stateLabel.Size = new System.Drawing.Size(32, 13);
-            this.stateLabel.TabIndex = 4;
-            this.stateLabel.Text = "State";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(34, 145);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.TabIndex = 6;
             // 
             // zipCodeLabel
             // 
@@ -117,41 +111,48 @@
             this.zipCodeLabel.TabIndex = 5;
             this.zipCodeLabel.Text = "Zip Code";
             // 
-            // label6
+            // stateLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(34, 145);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
-            this.label6.TabIndex = 6;
+            this.stateLabel.AutoSize = true;
+            this.stateLabel.Location = new System.Drawing.Point(34, 97);
+            this.stateLabel.Name = "stateLabel";
+            this.stateLabel.Size = new System.Drawing.Size(32, 13);
+            this.stateLabel.TabIndex = 4;
+            this.stateLabel.Text = "State";
             // 
-            // lastNameTextBox
+            // streetLabel
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(154, 46);
-            this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.lastNameTextBox.TabIndex = 7;
+            this.streetLabel.AutoSize = true;
+            this.streetLabel.Location = new System.Drawing.Point(34, 72);
+            this.streetLabel.Name = "streetLabel";
+            this.streetLabel.Size = new System.Drawing.Size(76, 13);
+            this.streetLabel.TabIndex = 3;
+            this.streetLabel.Text = "Street Address";
             // 
-            // streetAddressTextBox
+            // lastNameLabel
             // 
-            this.streetAddressTextBox.Location = new System.Drawing.Point(154, 72);
-            this.streetAddressTextBox.Name = "streetAddressTextBox";
-            this.streetAddressTextBox.Size = new System.Drawing.Size(100, 20);
-            this.streetAddressTextBox.TabIndex = 8;
+            this.lastNameLabel.AutoSize = true;
+            this.lastNameLabel.Location = new System.Drawing.Point(34, 50);
+            this.lastNameLabel.Name = "lastNameLabel";
+            this.lastNameLabel.Size = new System.Drawing.Size(58, 13);
+            this.lastNameLabel.TabIndex = 2;
+            this.lastNameLabel.Text = "Last Name";
             // 
-            // stateTextBox
+            // firstNameLabel
             // 
-            this.stateTextBox.Location = new System.Drawing.Point(154, 98);
-            this.stateTextBox.Name = "stateTextBox";
-            this.stateTextBox.Size = new System.Drawing.Size(100, 20);
-            this.stateTextBox.TabIndex = 9;
+            this.firstNameLabel.AutoSize = true;
+            this.firstNameLabel.Location = new System.Drawing.Point(34, 27);
+            this.firstNameLabel.Name = "firstNameLabel";
+            this.firstNameLabel.Size = new System.Drawing.Size(57, 13);
+            this.firstNameLabel.TabIndex = 1;
+            this.firstNameLabel.Text = "First Name";
             // 
-            // zipCodeTextBox
+            // firstNameTextBox
             // 
-            this.zipCodeTextBox.Location = new System.Drawing.Point(154, 124);
-            this.zipCodeTextBox.Name = "zipCodeTextBox";
-            this.zipCodeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.zipCodeTextBox.TabIndex = 10;
+            this.firstNameTextBox.Location = new System.Drawing.Point(154, 20);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.firstNameTextBox.TabIndex = 0;
             // 
             // continueButton
             // 
@@ -168,10 +169,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(293, 96);
             this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "Thanks for your interest in the UX Designer role at sUX Designs Inc. Please enter" +
-    " your information as prompted, and when ready, continue to the next page. We REA" +
-    "LLY look forward to your application!";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // resetTBLocationsButton
             // 
@@ -182,7 +180,7 @@
             this.resetTBLocationsButton.Text = "Reset Fields";
             this.resetTBLocationsButton.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // ApplicantInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -191,8 +189,8 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "ApplicantInfo";
+            this.Text = "Application - Applicant Info";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

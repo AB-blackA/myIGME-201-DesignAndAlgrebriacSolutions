@@ -16,7 +16,7 @@ namespace UT3___Job_Application_Bad_UX
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ApplicantInfo());
         }
     }
 }
