@@ -403,20 +403,20 @@ namespace UT3___President_s
 
                 
 
-                //if the user entered in the wrong answer, disable other controls, set out errorProvider on tb and inform of wrong answer,
+                //if the user entered in the wrong answer, disable other TextBoxs, set out errorProvider on tb and inform of wrong answer,
                 //and lock user
                 if (tb.Text != presidentInformation[presidentIndex, OrderColumnIndex])
                 {
                     this.errorProvider1.SetError(tb, "That is the wrong answer");
                     lockUser = true;
-                    DisableOtherControls();
+                    DisableNonActiveTextBoxs();
                 }
                 //otherwise, do the opposite and check for a win
                 else
                 {
                     this.errorProvider1.Clear();
                     lockUser = false;
-                    EnableOtherControls();
+                    EnableTextBoxs();
                     CheckForWin();
                 }
             }
@@ -434,16 +434,263 @@ namespace UT3___President_s
             TagPresidentsInTextBoxes();
         }
 
-        /* Method: FillPresidentInformation
-         * Purpose: Fills the array presidentInformation
+        /* Method: FillPresidentRadioButtons
+         * Purpose: Fill presidentRadioButtons array manually for all RadioButton's related to presidents
          * Limitations: none
          */
+        private void FillPresidentRadioButtons()
+        {
+            presidentRadioButtons[0] = this.benHarrisonRadioButton;
+            presidentRadioButtons[1] = this.fdrRadioButton;
+            presidentRadioButtons[2] = this.billClintonRadioButton;
+            presidentRadioButtons[3] = this.jamesBuchananRadioButton;
+            presidentRadioButtons[4] = this.frankPierceRadioButton;
+            presidentRadioButtons[5] = this.georeWBushRadioButton;
+            presidentRadioButtons[6] = this.obamaRadioButton;
+            presidentRadioButtons[7] = this.jfkRadioButton;
+            presidentRadioButtons[8] = this.willMcKinleyRadioButton;
+            presidentRadioButtons[9] = this.reaganRadioButton;
+            presidentRadioButtons[10] = this.eisenhowerRadioButton;
+            presidentRadioButtons[11] = this.vanBurenRadioButton;
+            presidentRadioButtons[12] = this.georgeWashingtonRadioButton;
+            presidentRadioButtons[13] = this.johnAdamsRadioButton;
+            presidentRadioButtons[14] = this.teddyRooseveltRadioButton;
+            presidentRadioButtons[15] = this.jeffersonRadioButton;
+        }
+
+        /* Method: FillPresidentTextButtons
+         * Purpose: Fill presidentTextButtons array manually for all TextBox's related to presidents
+         * Limitations: none
+         */
+        private void FillPresidentTextBoxes()
+        {
+            presidentTextBoxes[0] = this.benHarrisTextBox;
+            presidentTextBoxes[1] = this.fdrTextBox;
+            presidentTextBoxes[2] = this.billClintonTextBox;
+            presidentTextBoxes[3] = this.jamesBuchanaTextBox;
+            presidentTextBoxes[4] = this.frankPierceTextBox;
+            presidentTextBoxes[5] = this.georgeWBushTextBox;
+            presidentTextBoxes[6] = this.obamaTextBox;
+            presidentTextBoxes[7] = this.jfkTextBox;
+            presidentTextBoxes[8] = this.willMcKinleyTextBox;
+            presidentTextBoxes[9] = this.reaganTextBox;
+            presidentTextBoxes[10] = this.eisenhowerTextBox;
+            presidentTextBoxes[11] = this.vanBurenTextBox;
+            presidentTextBoxes[12] = this.georgeWashingtonTextBox;
+            presidentTextBoxes[13] = this.johnAdamsTextBox;
+            presidentTextBoxes[14] = this.teddyRooseveltTextBox;
+            presidentTextBoxes[15] = this.jeffersonTextBox;
+        }
+
+        /* Method: TagPresidentsInTextButtons
+         * Purpose: Set the Tag of each PresidentTextBox to hold its pairing PresidentRadioButton
+         * Limitations: none
+         */
+        private void TagPresidentsInTextBoxes()
+        {
+            benHarrisTextBox.Tag = benHarrisonRadioButton;
+            fdrTextBox.Tag = fdrRadioButton;
+            billClintonTextBox.Tag = billClintonRadioButton;
+            jamesBuchanaTextBox.Tag = jamesBuchananRadioButton;
+            frankPierceTextBox.Tag = frankPierceRadioButton;
+            georgeWBushTextBox.Tag = georeWBushRadioButton;
+            obamaTextBox.Tag = obamaRadioButton;
+            jfkTextBox.Tag = jfkRadioButton;
+            willMcKinleyTextBox.Tag = willMcKinleyRadioButton;
+            reaganTextBox.Tag = reaganRadioButton;
+            eisenhowerTextBox.Tag = eisenhowerRadioButton;
+            vanBurenTextBox.Tag = vanBurenRadioButton;
+            georgeWashingtonTextBox.Tag = georgeWashingtonRadioButton;
+            johnAdamsTextBox.Tag = johnAdamsRadioButton;
+            teddyRooseveltTextBox.Tag = teddyRooseveltRadioButton;
+            jeffersonTextBox.Tag = jeffersonRadioButton;
+        }
+
+        /* Method: ZeroPresidentTextBoxes
+         * Purpose: Set the intial Text of all President TextBox's to zero
+         * Limitations: none
+         */
+        private void ZeroPresidentTextBoxes()
+        {
+            //loop through presidentTextBoxes and zero each one's Text
+            try
+            {
+                foreach(TextBox tb in presidentTextBoxes)
+                {
+                    tb.Text = "0";
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Error. Can't ZeroPresidentTextBoxes");
+            }
+        }
+
+        /* Method: StartTimer
+         * Purpose: Starts the timer and changes any other relevant information related to it
+         * Limitations: none
+         */
+        private void StartTimer()
+        {
+
+            //create new timer, set interval to one second, create Timer_Tick delegate handler, Start timer, and change
+            //value of timerStarted = true
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
+            timer.Start();
+            timerStarted = true;
+        }
+
+        /* Delagte Method: Timer_Tick
+         * Purpose: Handle's the Tick event of Timer (every one second is called)
+         * Limitations: none
+         */
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+
+            //set the progressBar1.Value -= 1, then if it's zero call TimeOut
+            this.progressBar1.Value -= 1;
+            if(this.progressBar1.Value <= 0)
+            {
+                TimeOut();
+            }
+        }
+
+        /* Method: TimeOut
+         * Purpose: Reset the Game in the event the user ran out of time
+         * Limitations: none
+         */
+        private void TimeOut()
+        {
+            //unlock user and "unstart" the game
+            gameStart = false;
+            lockUser = false;
+
+            //call some methods that need resetting
+            ResetProgressBar();
+            ZeroPresidentTextBoxes();
+
+            //stop the timer and set bool to false
+            timer.Stop();
+            timerStarted = false;
+
+            //clear any errors
+            this.errorProvider1.Clear();
+
+            //enable all textboxs then start the game
+            EnableTextBoxs();
+            gameStart = true;
+        }
+
+        /* Method: ResetProgressBar
+         * Purpose: Reset's the Value of the progressBar to the maximum when called
+         * Limitations: none
+         */
+        private void ResetProgressBar()
+        {
+
+            this.progressBar1.Maximum = ProgressBarMax;
+            this.progressBar1.Value = progressBarValue;
+        }
+
+        /* Method: SetActiveTextBox
+         * Purpose: Accept a TextBox and set it to the activeTB
+         * Limitations: none
+         */
+        private void SetActiveTextBox(TextBox textBox)
+        {
+            this.activeTB = textBox;
+        }
+
+        /* Method: SetActivePresidentRadioButton
+         * Purpose: Accept a RadioButton and set it to the activePresRB
+         * Limitations: none
+         */
+        private void SetActivePresidentRadioButton(RadioButton radioButton)
+        {
+            this.activePresRB = radioButton;
+        }
+
+        /* Method: SetActiveFilterRadioButton
+         * Purpose: Accept a RadioButton and set it to the activeFilterRB
+         * Limitations: none
+         */
+        private void SetActiveFilterRadioButton(RadioButton radioButton)
+        {
+            this.activeFilterRB = radioButton;
+        }
+
+        private void SetPresidentTextBoxesHoverText()
+        {
+            foreach(TextBox tb in presidentTextBoxes)
+            {
+                this.toolTip1.SetToolTip(tb, "Which # President?");
+                
+            }
+        }
+
+        /* Method: DisableNonActiveTextBoxs
+         * Purpose: Disables non-active TextBox's to ReadOnly
+         * Limitations: none
+         */
+        private void DisableNonActiveTextBoxs()
+        {
+            foreach (TextBox tb in presidentTextBoxes)
+            {
+                if(tb != activeTB)
+                {
+                    tb.ReadOnly = true;
+                }
+            }
+        }
+
+        /* Method: EnableTextBoxs
+         * Purpose: Enables TextBox's  by setting all TextBox's to ReadOnly = false
+         * Limitations: none
+         */
+        private void EnableTextBoxs()
+        {
+            foreach (TextBox tb in presidentTextBoxes)
+            {
+                tb.ReadOnly = false;
+            }
+        }
+
+        /* Method: CheckForWin
+         * Purpose: Checks if the User has Won. If so, congratulate them and stop the game!
+         * Limitations: none
+         */
+        private void CheckForWin()
+        {
+
+            //loop through each presidentTextBoxes and check if each president's TextBox ISN'T the same as the value in presidentInformation
+            //if any of them are off, do nothing and return
+            for (int i = 0; i < presidentTextBoxes.Length; i++)
+            {
+                if (!(presidentTextBoxes[i].Text == presidentInformation[i, OrderColumnIndex]))
+                {
+                    return;
+                }
+            }
+
+            //if we don't return, the user has won! "unstart" the game, enable the exitButton, display the winningURL, and stop the timer!
+            gameStart = false;
+            this.exitButton.Enabled = true;
+            this.webBrowser1.Navigate(winningUrl);
+            timer1.Stop();
+        }
+
+        /* Method: FillPresidentInformation
+          * Purpose: Fills the array presidentInformation
+          * Limitations: none
+          */
         private void FillPresidentInformation()
         {
             //fill each row, column by column
-            for(int r = 0; r < presidentInformation.GetLength(0); r++)
+            for (int r = 0; r < presidentInformation.GetLength(0); r++)
             {
-                for(int c = 0; c < presidentInformation.GetLength(1); c++)
+                for (int c = 0; c < presidentInformation.GetLength(1); c++)
                 {
 
                     //based on value of r and c, fill in array corresponding to president's Name, Image, Order, WebPage, and Party
@@ -472,7 +719,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                
+
                                 break;
                         }
                     }
@@ -501,7 +748,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                
+
                                 break;
                         }
                     }
@@ -514,7 +761,7 @@ namespace UT3___President_s
                                 break;
 
                             case ImageColumnIndex:
-                                presidentInformation[r, c] =  "WilliamJClinton.jpeg";
+                                presidentInformation[r, c] = "WilliamJClinton.jpeg";
                                 break;
 
                             case OrderColumnIndex:
@@ -588,7 +835,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                
+
                                 break;
                         }
                     }
@@ -617,7 +864,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                
+
                                 break;
                         }
                     }
@@ -646,7 +893,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                                
+
                                 break;
                         }
                     }
@@ -675,7 +922,7 @@ namespace UT3___President_s
                                 break;
 
                             default:
-                               
+
                                 break;
                         }
                     }
@@ -925,255 +1172,6 @@ namespace UT3___President_s
             }
         }
 
-        /* Method: FillPresidentRadioButtons
-         * Purpose: Fill presidentRadioButtons array manually for all RadioButton's related to presidents
-         * Limitations: none
-         */
-        private void FillPresidentRadioButtons()
-        {
-            presidentRadioButtons[0] = this.benHarrisonRadioButton;
-            presidentRadioButtons[1] = this.fdrRadioButton;
-            presidentRadioButtons[2] = this.billClintonRadioButton;
-            presidentRadioButtons[3] = this.jamesBuchananRadioButton;
-            presidentRadioButtons[4] = this.frankPierceRadioButton;
-            presidentRadioButtons[5] = this.georeWBushRadioButton;
-            presidentRadioButtons[6] = this.obamaRadioButton;
-            presidentRadioButtons[7] = this.jfkRadioButton;
-            presidentRadioButtons[8] = this.willMcKinleyRadioButton;
-            presidentRadioButtons[9] = this.reaganRadioButton;
-            presidentRadioButtons[10] = this.eisenhowerRadioButton;
-            presidentRadioButtons[11] = this.vanBurenRadioButton;
-            presidentRadioButtons[12] = this.georgeWashingtonRadioButton;
-            presidentRadioButtons[13] = this.johnAdamsRadioButton;
-            presidentRadioButtons[14] = this.teddyRooseveltRadioButton;
-            presidentRadioButtons[15] = this.jeffersonRadioButton;
-        }
 
-        /* Method: FillPresidentTextButtons
-         * Purpose: Fill presidentTextButtons array manually for all TextBox's related to presidents
-         * Limitations: none
-         */
-        private void FillPresidentTextBoxes()
-        {
-            presidentTextBoxes[0] = this.benHarrisTextBox;
-            presidentTextBoxes[1] = this.fdrTextBox;
-            presidentTextBoxes[2] = this.billClintonTextBox;
-            presidentTextBoxes[3] = this.jamesBuchanaTextBox;
-            presidentTextBoxes[4] = this.frankPierceTextBox;
-            presidentTextBoxes[5] = this.georgeWBushTextBox;
-            presidentTextBoxes[6] = this.obamaTextBox;
-            presidentTextBoxes[7] = this.jfkTextBox;
-            presidentTextBoxes[8] = this.willMcKinleyTextBox;
-            presidentTextBoxes[9] = this.reaganTextBox;
-            presidentTextBoxes[10] = this.eisenhowerTextBox;
-            presidentTextBoxes[11] = this.vanBurenTextBox;
-            presidentTextBoxes[12] = this.georgeWashingtonTextBox;
-            presidentTextBoxes[13] = this.johnAdamsTextBox;
-            presidentTextBoxes[14] = this.teddyRooseveltTextBox;
-            presidentTextBoxes[15] = this.jeffersonTextBox;
-        }
-
-        /* Method: TagPresidentsInTextButtons
-         * Purpose: Set the Tag of each PresidentTextBox to hold its pairing PresidentRadioButton
-         * Limitations: none
-         */
-        private void TagPresidentsInTextBoxes()
-        {
-            benHarrisTextBox.Tag = benHarrisonRadioButton;
-            fdrTextBox.Tag = fdrRadioButton;
-            billClintonTextBox.Tag = billClintonRadioButton;
-            jamesBuchanaTextBox.Tag = jamesBuchananRadioButton;
-            frankPierceTextBox.Tag = frankPierceRadioButton;
-            georgeWBushTextBox.Tag = georeWBushRadioButton;
-            obamaTextBox.Tag = obamaRadioButton;
-            jfkTextBox.Tag = jfkRadioButton;
-            willMcKinleyTextBox.Tag = willMcKinleyRadioButton;
-            reaganTextBox.Tag = reaganRadioButton;
-            eisenhowerTextBox.Tag = eisenhowerRadioButton;
-            vanBurenTextBox.Tag = vanBurenRadioButton;
-            georgeWashingtonTextBox.Tag = georgeWashingtonRadioButton;
-            johnAdamsTextBox.Tag = johnAdamsRadioButton;
-            teddyRooseveltTextBox.Tag = teddyRooseveltRadioButton;
-            jeffersonTextBox.Tag = jeffersonRadioButton;
-        }
-
-        /* Method: ZeroPresidentTextBoxes
-         * Purpose: Set the intial Text of all President TextBox's to zero
-         * Limitations: none
-         */
-        private void ZeroPresidentTextBoxes()
-        {
-            //loop through presidentTextBoxes and zero each one's Text
-            try
-            {
-                foreach(TextBox tb in presidentTextBoxes)
-                {
-                    tb.Text = "0";
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Error. Can't ZeroPresidentTextBoxes");
-            }
-        }
-
-        /* Method: StartTimer
-         * Purpose: Starts the timer and changes any other relevant information related to it
-         * Limitations: none
-         */
-        private void StartTimer()
-        {
-
-            //create new timer, set interval to one second, create Timer_Tick delegate handler, Start timer, and change
-            //value of timerStarted = true
-            timer = new Timer();
-            timer.Interval = 1000;
-            timer.Tick += Timer_Tick;
-            timer.Start();
-            timerStarted = true;
-        }
-
-        /* Delagte Method: Timer_Tick
-         * Purpose: Handle's the Tick event of Timer (every one second is called)
-         * Limitations: none
-         */
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-
-            //set the progressBar1.Value -= 1, then if it's zero call TimeOut
-            this.progressBar1.Value -= 1;
-            if(this.progressBar1.Value <= 0)
-            {
-                TimeOut();
-            }
-        }
-
-        /* Method: TimeOut
-         * Purpose: Reset the Game in the event the user ran out of time
-         * Limitations: none
-         */
-        private void TimeOut()
-        {
-            //unlock user and "unstart" the game
-            gameStart = false;
-            lockUser = false;
-
-            //call some methods that need resetting
-            ResetProgressBar();
-            ZeroPresidentTextBoxes();
-
-            //stop the timer and set bool to false
-            timer.Stop();
-            timerStarted = false;
-
-            //clear any errors
-            this.errorProvider1.Clear();
-
-            //enable all controls then start the game
-            EnableOtherControls();
-            gameStart = true;
-        }
-
-        /* Method: ResetProgressBar
-         * Purpose: Reset's the Value of the progressBar to the maximum when called
-         * Limitations: none
-         */
-        private void ResetProgressBar()
-        {
-
-            this.progressBar1.Maximum = ProgressBarMax;
-            this.progressBar1.Value = progressBarValue;
-        }
-
-        /* Method: SetActiveTextBox
-         * Purpose: Accept a TextBox and set it to the activeTB
-         * Limitations: none
-         */
-        private void SetActiveTextBox(TextBox textBox)
-        {
-            this.activeTB = textBox;
-        }
-
-        /* Method: SetActivePresidentRadioButton
-         * Purpose: Accept a RadioButton and set it to the activePresRB
-         * Limitations: none
-         */
-        private void SetActivePresidentRadioButton(RadioButton radioButton)
-        {
-            this.activePresRB = radioButton;
-        }
-
-        /* Method: SetActiveFilterRadioButton
-         * Purpose: Accept a RadioButton and set it to the activeFilterRB
-         * Limitations: none
-         */
-        private void SetActiveFilterRadioButton(RadioButton radioButton)
-        {
-            this.activeFilterRB = radioButton;
-        }
-
-        private void SetPresidentTextBoxesHoverText()
-        {
-            foreach(TextBox tb in presidentTextBoxes)
-            {
-                this.toolTip1.SetToolTip(tb, "Which # President?");
-                
-            }
-        }
-
-        /* Method: DisableOtherControls
-         * Purpose: Disables "all" controls (by setting TextBox's to ReadOnly. Nothing else is disabled
-         * Limitations: none
-         */
-        private void DisableOtherControls()
-        {
-            foreach (TextBox tb in presidentTextBoxes)
-            {
-                if(tb != activeTB)
-                {
-                    tb.ReadOnly = true;
-                }
-            }
-        }
-
-        /* Method: EnableOtherControls
-         * Purpose: Enables "all" controls (only TextBox's would be disabled) by setting all TextBox's to ReadOnly = false
-         * Limitations: none
-         */
-        private void EnableOtherControls()
-        {
-            foreach (TextBox tb in presidentTextBoxes)
-            {
-                tb.ReadOnly = false;
-            }
-        }
-
-        /* Method: CheckForWin
-         * Purpose: Checks if the User has Won. If so, congratulate them and stop the game!
-         * Limitations: none
-         */
-        private void CheckForWin()
-        {
-
-            //loop through each presidentTextBoxes and check if each president's TextBox ISN'T the same as the value in presidentInformation
-            //if any of them are off, do nothing and return
-            for (int i = 0; i < presidentTextBoxes.Length; i++)
-            {
-                if (!(presidentTextBoxes[i].Text == presidentInformation[i, OrderColumnIndex]))
-                {
-                    return;
-                }
-            }
-
-            //if we don't return, the user has won! "unstart" the game, enable the exitButton, display the winningURL, and stop the timer!
-            gameStart = false;
-            this.exitButton.Enabled = true;
-            this.webBrowser1.Navigate(winningUrl);
-            timer1.Stop();
-        }
-
-       
-
-        
     }
 }
