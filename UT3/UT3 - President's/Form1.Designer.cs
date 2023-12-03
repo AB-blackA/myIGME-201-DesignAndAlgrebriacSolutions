@@ -55,7 +55,7 @@
             this.benHarrisTextBox = new System.Windows.Forms.TextBox();
             this.teddyRooseveltRadioButton = new System.Windows.Forms.RadioButton();
             this.billClintonRadioButton = new System.Windows.Forms.RadioButton();
-            this.georeWBushRadioButton = new System.Windows.Forms.RadioButton();
+            this.georgeWBushRadioButton = new System.Windows.Forms.RadioButton();
             this.obamaRadioButton = new System.Windows.Forms.RadioButton();
             this.willMcKinleyRadioButton = new System.Windows.Forms.RadioButton();
             this.reaganRadioButton = new System.Windows.Forms.RadioButton();
@@ -105,7 +105,7 @@
             this.presGroupBox.Controls.Add(this.benHarrisTextBox);
             this.presGroupBox.Controls.Add(this.teddyRooseveltRadioButton);
             this.presGroupBox.Controls.Add(this.billClintonRadioButton);
-            this.presGroupBox.Controls.Add(this.georeWBushRadioButton);
+            this.presGroupBox.Controls.Add(this.georgeWBushRadioButton);
             this.presGroupBox.Controls.Add(this.obamaRadioButton);
             this.presGroupBox.Controls.Add(this.willMcKinleyRadioButton);
             this.presGroupBox.Controls.Add(this.reaganRadioButton);
@@ -335,14 +335,14 @@
             // 
             // georeWBushRadioButton
             // 
-            this.georeWBushRadioButton.AutoSize = true;
-            this.georeWBushRadioButton.Location = new System.Drawing.Point(12, 134);
-            this.georeWBushRadioButton.Name = "georeWBushRadioButton";
-            this.georeWBushRadioButton.Size = new System.Drawing.Size(101, 17);
-            this.georeWBushRadioButton.TabIndex = 13;
-            this.georeWBushRadioButton.TabStop = true;
-            this.georeWBushRadioButton.Text = "George W Bush";
-            this.georeWBushRadioButton.UseVisualStyleBackColor = true;
+            this.georgeWBushRadioButton.AutoSize = true;
+            this.georgeWBushRadioButton.Location = new System.Drawing.Point(12, 134);
+            this.georgeWBushRadioButton.Name = "georeWBushRadioButton";
+            this.georgeWBushRadioButton.Size = new System.Drawing.Size(101, 17);
+            this.georgeWBushRadioButton.TabIndex = 13;
+            this.georgeWBushRadioButton.TabStop = true;
+            this.georgeWBushRadioButton.Text = "George W Bush";
+            this.georgeWBushRadioButton.UseVisualStyleBackColor = true;
             // 
             // obamaRadioButton
             // 
@@ -568,7 +568,7 @@
         private System.Windows.Forms.TextBox benHarrisTextBox;
         private System.Windows.Forms.RadioButton teddyRooseveltRadioButton;
         private System.Windows.Forms.RadioButton billClintonRadioButton;
-        private System.Windows.Forms.RadioButton georeWBushRadioButton;
+        private System.Windows.Forms.RadioButton georgeWBushRadioButton;
         private System.Windows.Forms.RadioButton obamaRadioButton;
         private System.Windows.Forms.RadioButton willMcKinleyRadioButton;
         private System.Windows.Forms.RadioButton reaganRadioButton;

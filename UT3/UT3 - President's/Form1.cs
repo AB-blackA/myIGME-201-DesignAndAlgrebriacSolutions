@@ -15,13 +15,32 @@ using static System.Net.WebRequestMethods;
  * Purpose: Creation of a game where the user has to guess certain US President's Order (in way of election history)
  * Limitations: Requires User to have an Internet connection to properly visit certain webpages
  */
+
+/* Form Controls:
+1. Form that holds components and is the “game” window
+2. Group Box that holds all President-related Information (Radio Buttons, Text Fields, Picture Box)
+3. Group Box that holds Filter information (filter Presidents by Party)
+4. Group Box that holds all WebBrowser related Information
+5-20: Radio Buttons for each President included in the game
+21-36: Text Fields for each president
+37-52: Radio Buttons for Each Filter Option in Filter Group Box
+53. PictureBox that changes to show the selected President (based on President Radio Button’s)
+54: Error Provider for when a Player inserts a wrong value into a text field
+55. Exit Button (close application)
+56: Timer for the game
+57: Status Strip to hold a toolStripProgressBar (to work with timer)
+58: Aforementioned toolStripProgressBar
+59: WebBrowserControl that allows Users to see the Wikipedia Page of the President’s they’ve selected
+60. ToolTip when the User hovers over TextBox’s to prompt them to answer “Which # President?”
+*/
+
 namespace UT3___President_s
 {
     /* Class: Form1
      * Purpose: Form that holds all useful controls and data types for the exe
      * Limitations: none
      */
-    public partial class Form1 : Form
+public partial class Form1 : Form
     {
 
         //arrays for holding information related to president's (including name, order, jpg location, web page, and party affiliation)
@@ -89,54 +108,54 @@ namespace UT3___President_s
             InitializeComponent();
 
             //all president radio button CheckedChanged EventHandlers use the same method
-            this.benHarrisonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.fdrRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.billClintonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.jamesBuchananRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.frankPierceRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.georeWBushRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.obamaRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.jfkRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.willMcKinleyRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.reaganRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.eisenhowerRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.vanBurenRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.georgeWashingtonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.johnAdamsRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.teddyRooseveltRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
-            this.jeffersonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton_CheckedChanged);
+            this.benHarrisonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.fdrRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.billClintonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.jamesBuchananRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.frankPierceRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.georgeWBushRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.obamaRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.jfkRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.willMcKinleyRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.reaganRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.eisenhowerRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.vanBurenRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.georgeWashingtonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.johnAdamsRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.teddyRooseveltRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
+            this.jeffersonRadioButton.CheckedChanged += new EventHandler(PresidentRadioButton__CheckedChanged);
 
             //all president TextBox TextChanged EventHandlers use the same method
-            this.benHarrisTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.fdrTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.billClintonTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.jamesBuchananRadioButton.CheckedChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.frankPierceTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.georgeWBushTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.obamaTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.jfkTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.willMcKinleyTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.reaganTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.eisenhowerTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.vanBurenTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.georgeWashingtonTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.johnAdamsTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.teddyRooseveltTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
-            this.jeffersonTextBox.TextChanged += new EventHandler(PresidentTextBox_TextChanged);
+            this.benHarrisTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.fdrTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.billClintonTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.jamesBuchananRadioButton.CheckedChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.frankPierceTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.georgeWBushTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.obamaTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.jfkTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.willMcKinleyTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.reaganTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.eisenhowerTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.vanBurenTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.georgeWashingtonTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.johnAdamsTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.teddyRooseveltTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
+            this.jeffersonTextBox.TextChanged += new EventHandler(PresidentTextBox__TextChanged);
 
             //both presidentPictureBox MouseHover and MouseLeave use the same method for their EventHandler
-            this.presidentPictureBox.MouseHover += new EventHandler(PresidentPictureBox_MouseHover);
+            this.presidentPictureBox.MouseHover += new EventHandler(PresidentPictureBox__MouseHover);
             this.presidentPictureBox.MouseLeave += new EventHandler(PresidentPictureBox_MouseLeave);
 
             //all filter RadioButtons CheckedChanged EventHandler use the same method
-            this.filterDemRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
-            this.filterRepublicanRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
-            this.filterFederalistRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
-            this.filterDemRepublicanRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
-            this.filterAllRadioButton.CheckedChanged += new EventHandler(FilterRadioButton_CheckedChanged);
+            this.filterDemRadioButton.CheckedChanged += new EventHandler(FilterRadioButton__CheckedChanged);
+            this.filterRepublicanRadioButton.CheckedChanged += new EventHandler(FilterRadioButton__CheckedChanged);
+            this.filterFederalistRadioButton.CheckedChanged += new EventHandler(FilterRadioButton__CheckedChanged);
+            this.filterDemRepublicanRadioButton.CheckedChanged += new EventHandler(FilterRadioButton__CheckedChanged);
+            this.filterAllRadioButton.CheckedChanged += new EventHandler(FilterRadioButton__CheckedChanged);
 
             //exitbutton EventHandler for leaving the game
-            this.exitButton.Click += new EventHandler(ExitButton_Click);
+            this.exitButton.Click += new EventHandler(ExitButton__Click);
 
             //initialize some aspects of some of the controls
             this.presidentPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -159,20 +178,20 @@ namespace UT3___President_s
 
         }
 
-        /* Method: ExitButton_Click
+        /* Method: ExitButton__Click
          * Purpose: Exit the Application
          * Limiations: none
          */
-        private void ExitButton_Click(object sender, EventArgs e)
+        private void ExitButton__Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        /* Delegate Method: PresidentRadioButton_CheckedChange
+        /* Method: PresidentRadioButton__CheckedChange
          * Purpose: Accept a President RadioButton EventHandler and change aspects of the form based on it
          * Limitations: none
          */
-        private void PresidentRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void PresidentRadioButton__CheckedChanged(object sender, EventArgs e)
         {
             //do nothing if game hasn't started yet
             if (!gameStart)
@@ -221,11 +240,11 @@ namespace UT3___President_s
             
         }
 
-        /* Delegate Method: FilterRadioButton_CheckedChanged
+        /* Method: FilterRadioButton__CheckedChanged
          * Purpose: Accept a Filter RadioButton's CheckedChanged EventHandler and change aspects of the form based on it
          * Limitations: none
          */
-        private void FilterRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void FilterRadioButton__CheckedChanged(object sender, EventArgs e)
         {
             //do nothing if game hasn't started
             if (!gameStart)
@@ -297,11 +316,11 @@ namespace UT3___President_s
                 
         }
 
-        /* Delegate Method: PresidentPictureBox_MouseHover
+        /* Method: PresidentPictureBox__MouseHover
          * Purpose: Accepts PresidentPictureBox's MouseHover EventHandler and enlarges the current president's image
          * Limiations: none
          */
-        private void PresidentPictureBox_MouseHover(object sender, EventArgs e)
+        private void PresidentPictureBox__MouseHover(object sender, EventArgs e)
         {
             //store original size of presidentPictureBox in its Tag property if it's not null
             if (presidentPictureBox.Tag == null)
@@ -313,7 +332,7 @@ namespace UT3___President_s
             presidentPictureBox.Size = new Size((int)(presidentPictureBox.Width * pictureBoxScaleFactor), (int)(presidentPictureBox.Height * pictureBoxScaleFactor));
         }
 
-        /* Delegate Method: PresidentPictureBox_MouseLeave
+        /* Method: PresidentPictureBox_MouseLeave
          * Purpose: Accepts PresidentPictureBox's MouseLeave EventHandler and resets the current president's image size
          * Limiations: none
          */
@@ -328,12 +347,12 @@ namespace UT3___President_s
             }
         }
 
-        /* Delegate Method: PresidentTextBox_TextChanged
+        /* Method: PresidentTextBox__TextChanged
          * Purpose: Accept's President TextBox's TextChanged EventHandler and uses that information to determine if the user
          * has entered a value correct to that President's correct order in Presidency. Depending on result, affect the game
          * Limitations: none
          */
-        private void PresidentTextBox_TextChanged(object sender, EventArgs e)
+        private void PresidentTextBox__TextChanged(object sender, EventArgs e)
         {
 
             //do nothing if game hasn't started yet
@@ -436,26 +455,27 @@ namespace UT3___President_s
 
         /* Method: FillPresidentRadioButtons
          * Purpose: Fill presidentRadioButtons array manually for all RadioButton's related to presidents
+         * 
          * Limitations: none
          */
         private void FillPresidentRadioButtons()
         {
-            presidentRadioButtons[0] = this.benHarrisonRadioButton;
-            presidentRadioButtons[1] = this.fdrRadioButton;
-            presidentRadioButtons[2] = this.billClintonRadioButton;
-            presidentRadioButtons[3] = this.jamesBuchananRadioButton;
-            presidentRadioButtons[4] = this.frankPierceRadioButton;
-            presidentRadioButtons[5] = this.georeWBushRadioButton;
-            presidentRadioButtons[6] = this.obamaRadioButton;
-            presidentRadioButtons[7] = this.jfkRadioButton;
-            presidentRadioButtons[8] = this.willMcKinleyRadioButton;
-            presidentRadioButtons[9] = this.reaganRadioButton;
-            presidentRadioButtons[10] = this.eisenhowerRadioButton;
-            presidentRadioButtons[11] = this.vanBurenRadioButton;
-            presidentRadioButtons[12] = this.georgeWashingtonRadioButton;
-            presidentRadioButtons[13] = this.johnAdamsRadioButton;
-            presidentRadioButtons[14] = this.teddyRooseveltRadioButton;
-            presidentRadioButtons[15] = this.jeffersonRadioButton;
+            presidentRadioButtons[BenHarrisonRowIndex] = this.benHarrisonRadioButton;
+            presidentRadioButtons[FdrRowIndex] = this.fdrRadioButton;
+            presidentRadioButtons[BillClintonRowIndex] = this.billClintonRadioButton;
+            presidentRadioButtons[JamesBuchananRowIndex] = this.jamesBuchananRadioButton;
+            presidentRadioButtons[FrankPierceRowIndex] = this.frankPierceRadioButton;
+            presidentRadioButtons[GeorgeWBushRowIndex] = this.georgeWBushRadioButton;
+            presidentRadioButtons[ObamaRowIndex] = this.obamaRadioButton;
+            presidentRadioButtons[JfkRowIndex] = this.jfkRadioButton;
+            presidentRadioButtons[WillMcKinleyRowIndex] = this.willMcKinleyRadioButton;
+            presidentRadioButtons[ReaganRowIndex] = this.reaganRadioButton;
+            presidentRadioButtons[EisenhowerRowIndex] = this.eisenhowerRadioButton;
+            presidentRadioButtons[VanBurenRowIndex] = this.vanBurenRadioButton;
+            presidentRadioButtons[GeorgeWBushRowIndex] = this.georgeWashingtonRadioButton;
+            presidentRadioButtons[JohnAdamsRowIndex] = this.johnAdamsRadioButton;
+            presidentRadioButtons[TeddyRooseveltRowIndex] = this.teddyRooseveltRadioButton;
+            presidentRadioButtons[JeffersonRowIndex] = this.jeffersonRadioButton;
         }
 
         /* Method: FillPresidentTextButtons
@@ -464,22 +484,23 @@ namespace UT3___President_s
          */
         private void FillPresidentTextBoxes()
         {
-            presidentTextBoxes[0] = this.benHarrisTextBox;
-            presidentTextBoxes[1] = this.fdrTextBox;
-            presidentTextBoxes[2] = this.billClintonTextBox;
-            presidentTextBoxes[3] = this.jamesBuchanaTextBox;
-            presidentTextBoxes[4] = this.frankPierceTextBox;
-            presidentTextBoxes[5] = this.georgeWBushTextBox;
-            presidentTextBoxes[6] = this.obamaTextBox;
-            presidentTextBoxes[7] = this.jfkTextBox;
-            presidentTextBoxes[8] = this.willMcKinleyTextBox;
-            presidentTextBoxes[9] = this.reaganTextBox;
-            presidentTextBoxes[10] = this.eisenhowerTextBox;
-            presidentTextBoxes[11] = this.vanBurenTextBox;
-            presidentTextBoxes[12] = this.georgeWashingtonTextBox;
-            presidentTextBoxes[13] = this.johnAdamsTextBox;
-            presidentTextBoxes[14] = this.teddyRooseveltTextBox;
-            presidentTextBoxes[15] = this.jeffersonTextBox;
+            presidentTextBoxes[BenHarrisonRowIndex] = this.benHarrisTextBox;
+            presidentTextBoxes[FdrRowIndex] = this.fdrTextBox;
+            presidentTextBoxes[BillClintonRowIndex] = this.billClintonTextBox;
+            presidentTextBoxes[JamesBuchananRowIndex] = this.jamesBuchanaTextBox;
+            presidentTextBoxes[FrankPierceRowIndex] = this.frankPierceTextBox;
+            presidentTextBoxes[GeorgeWBushRowIndex] = this.georgeWBushTextBox;
+            presidentTextBoxes[ObamaRowIndex] = this.obamaTextBox;
+            presidentTextBoxes[JfkRowIndex] = this.jfkTextBox;
+            presidentTextBoxes[WillMcKinleyRowIndex] = this.willMcKinleyTextBox;
+            presidentTextBoxes[ReaganRowIndex] = this.reaganTextBox;
+            presidentTextBoxes[EisenhowerRowIndex] = this.eisenhowerTextBox;
+            presidentTextBoxes[VanBurenRowIndex] = this.vanBurenTextBox;
+            presidentTextBoxes[GeorgeWashingtonRowIndex] = this.georgeWashingtonTextBox;
+            presidentTextBoxes[JohnAdamsRowIndex] = this.johnAdamsTextBox;
+            presidentTextBoxes[TeddyRooseveltRowIndex] = this.teddyRooseveltTextBox;
+            presidentTextBoxes[JeffersonRowIndex] = this.jeffersonTextBox;
+
         }
 
         /* Method: TagPresidentsInTextButtons
@@ -493,7 +514,7 @@ namespace UT3___President_s
             billClintonTextBox.Tag = billClintonRadioButton;
             jamesBuchanaTextBox.Tag = jamesBuchananRadioButton;
             frankPierceTextBox.Tag = frankPierceRadioButton;
-            georgeWBushTextBox.Tag = georeWBushRadioButton;
+            georgeWBushTextBox.Tag = georgeWBushRadioButton;
             obamaTextBox.Tag = obamaRadioButton;
             jfkTextBox.Tag = jfkRadioButton;
             willMcKinleyTextBox.Tag = willMcKinleyRadioButton;
@@ -533,7 +554,7 @@ namespace UT3___President_s
         private void StartTimer()
         {
 
-            //create new timer, set interval to one second, create Timer_Tick delegate handler, Start timer, and change
+            //create new timer, set interval to one second, create Timer_Tick  handler, Start timer, and change
             //value of timerStarted = true
             timer = new Timer();
             timer.Interval = 1000;
@@ -844,7 +865,7 @@ namespace UT3___President_s
                         switch (c)
                         {
                             case NameColumnIndex:
-                                presidentInformation[r, c] = georeWBushRadioButton.Text;
+                                presidentInformation[r, c] = georgeWBushRadioButton.Text;
                                 break;
 
                             case ImageColumnIndex:
