@@ -38,6 +38,14 @@ namespace Final___Search_Form
             searcher = new Searcher(this.requester, this.gameDB, this.teamDB);
         }
 
+        /* Method: InstantiateGameList
+         * Purpose: Fill GameDatabase object
+         * Limitations: none, but Authors note on this method:
+         * for a real application, this method shouldn't be tied to a page but to an overarching "manager class" that creates these pages
+         * and relevant information. Adding games like this is nonsensical in almost every way for an online database. It would be more correct
+         * to store these information in a file and pull it from there. For the sake of this program's needs, however, this is an "acceptable way"
+         * to do this.
+         */
         private void InstantiateGameList()
         {
             gameDB = new GameDatabase();
@@ -52,15 +60,18 @@ namespace Final___Search_Form
 
         private void SearchButton__Click(object sender, EventArgs e)
         {
+            //fill games list via the searcher, based on the User's entered text for the searchGameTextBox
             games = searcher.SearchGame(searchGameTextBox.Text);
+
+            //create RichTextBox's to be added to gameTableLayoutPanel
             RichTextBox gameName;
             RichTextBox gamePlatforms;
 
             // Clear existing controls and reset properties
             gameTableLayoutPanel.Controls.Clear();
-            gameTableLayoutPanel.RowStyles.Clear();  // Optionally clear row styles
+            gameTableLayoutPanel.RowStyles.Clear();
 
-
+            //loop through all found games matching search result and add their information to gameTableLayoutPanel
             foreach (Game game in games)
             {
                 gameName = new RichTextBox();
@@ -74,6 +85,7 @@ namespace Final___Search_Form
                     gamePlatforms.Text += platform + "\n";
                 }
 
+                //optional styling to look nicer
                 gameName.Dock = DockStyle.Fill;
                 gamePlatforms.Dock = DockStyle.Fill;
 
@@ -83,7 +95,10 @@ namespace Final___Search_Form
 
             }
 
-            
+            //turn off the autoscroll functionality of gameTableLayoutPanel if it's not warranted.
+            //added to fix visual error were a large return query would enable the scrolling, but a thereafter smaller one
+            //would keep the scroll even if not needed
+            gameTableLayoutPanel.AutoScroll = gameTableLayoutPanel.Controls.Count > gameTableLayoutPanel.RowCount;
 
 
         }
