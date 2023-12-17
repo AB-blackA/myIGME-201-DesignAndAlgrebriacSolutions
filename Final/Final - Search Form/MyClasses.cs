@@ -43,34 +43,38 @@ namespace Final___Search_Form
     // Represents a database of Game
     public class GameDatabase
     {
-        private Dictionary<Game, string> GameDictionary;
-        private Searcher search;
+        private List<Game> gameDictionary;
 
-        public GameDatabase(Searcher searcher)
+        public GameDatabase( )
         {
-            GameDictionary = new Dictionary<Game, string>();
-            search = searcher;
+            this.gameDictionary = new List<Game>();
         }
 
-        public KeyValuePair<Game, string> ReturnSearch(Game game)
+        public List<Game> ReturnSearch(string gameTitle)
         {
             // Add logic to search for a game in the database
 
-            if (GameDictionary.ContainsKey(game))
+            List<Game> foundGames = new List<Game> ();
+
+            foreach(Game g in this.gameDictionary)
             {
-                return new KeyValuePair<Game, string>(game, GameDictionary[game]);
-            }
-            else
-            {
-                return new KeyValuePair<Game, string>(new GameNotFound(), "Game not found.");
+                if(g.Name.IndexOf(gameTitle, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    foundGames.Add(g);
+                }
             }
 
+            if(foundGames.Count == 0)
+            {
+                foundGames.Add(new GameNotFound());
+            }
             
+            return foundGames;
         }
 
-        public void AddGame(Game game, string info)
+        public void AddGame(Game game)
         {
-            // Add logic to add a game to the database
+            this.gameDictionary.Add(game);
         }
     }
 
@@ -85,43 +89,22 @@ namespace Final___Search_Form
     {
     }
 
-    // Represents a collection of teams
-    public class Teams
-    {
-        private List<Team> teams;
-
-        public Teams()
-        {
-            teams = new List<Team>();
-        }
-
-        public void AddTeam(Team team)
-        {
-            teams.Add(team);
-        }
-
-        public void AddTeamNotFound()
-        {
-            // Add logic for handling team not found
-        }
-    }
-
     // Represents a database of teams
     public class TeamDatabase
     {
-        private List<Teams> teams;
+        private List<Team> teams;
         private Searcher search;
 
         public TeamDatabase(Searcher searcher)
         {
-            teams = new List<Teams>();
+            teams = new List<Team>();
             search = searcher;
         }
 
-        public Teams ReturnTeamsByGame(Game game)
+        public Team ReturnTeamsByGame(Game game)
         {
             // Add logic to return teams based on a game
-            return new Teams();
+            return new Team();
         }
 
         public void AddGameToMyTeam(KeyValuePair<Game, string> gameInfo)
@@ -195,61 +178,33 @@ namespace Final___Search_Form
         }
     }
 
-    // Represents a user interface
-    public class UserInterface
-    {
-        private Searcher search;
-
-        public UserInterface(Searcher searcher)
-        {
-            search = searcher;
-        }
-
-        public void Search()
-        {
-            // Add logic to initiate a search
-        }
-
-        public void AskToAddTeam()
-        {
-            // Add logic to prompt the user to add a team
-        }
-
-        public void AskToAddGame()
-        {
-            // Add logic to prompt the user to add a game
-        }
-    }
-
     // Represents a searcher
     public class Searcher
     {
-        private KeyValuePair<Game, string> foundGame;
+        private List<Game> foundGames;
         private List<Team> foundTeams;
         private GameDatabase gameDB;
-        private TeamDatabase teamDB;
         private Requester requester;
-        private UserInterface ui;
+        private TeamDatabase teamDB;
 
-        public Searcher(UserInterface userInterface, Requester request, GameDatabase gameDatabase, TeamDatabase teamDatabase)
+        public Searcher(Requester request, GameDatabase gameDatabase, TeamDatabase teamDatabase)
         {
-            ui = userInterface;
             requester = request;
             gameDB = gameDatabase;
             teamDB = teamDatabase;
         }
 
-        public KeyValuePair<Game, string> SearchGame(string gameName)
+        public List<Game> SearchGame(string gameName)
         {
             // Add logic to search for a game
-            return new KeyValuePair<Game, string>(new Game(gameName, new List<string>()), "Found");
+            return this.gameDB.ReturnSearch(gameName);
         }
 
-        public KeyValuePair<Game, string> SearchGame(string gameName, string platform)
+        /*public KeyValuePair<Game, string> SearchGame(string gameName, string platform)
         {
             // Add logic to search for a game with platform
             return new KeyValuePair<Game, string>(new Game(gameName, new List<string> { platform }), "Found");
-        }
+        }*/
 
         public Team SearchTeam(KeyValuePair<Game, string> gameInfo)
         {

@@ -48,9 +48,10 @@
             this.gameTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.gameTableLayoutPanel.Location = new System.Drawing.Point(26, 159);
             this.gameTableLayoutPanel.Name = "gameTableLayoutPanel";
-            this.gameTableLayoutPanel.RowCount = 1;
+            this.gameTableLayoutPanel.RowCount = 2;
             this.gameTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.gameTableLayoutPanel.Size = new System.Drawing.Size(390, 102);
+            this.gameTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.gameTableLayoutPanel.Size = new System.Drawing.Size(390, 234);
             this.gameTableLayoutPanel.TabIndex = 0;
             // 
             // searchGameTextBox
