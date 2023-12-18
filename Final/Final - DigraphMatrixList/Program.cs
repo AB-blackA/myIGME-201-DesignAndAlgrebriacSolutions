@@ -48,7 +48,7 @@ namespace Final___DigraphMatrixList
              /* l.blue */   {-1,     1,     0,  -1,         -1,     -1,     -1,     -1 },
              /* orange */   {-1,     -1,    -1,  -1,         -1,     1,     -1,     -1 },
              /* purple */   {-1,     -1,    -1,  -1,         -1,     -1,     1,     -1 },
-             /* yellow */   {-1,     -1,    -1,  -1,         -1,     -1,     -1,     1 },
+             /* yellow */   {-1,     -1,    -1,  -1,         -1,     -1,     -1,     6 },
              /* green */    {-1,     -1,    -1,  -1,         -1,     -1,     -1,     -1 }
 
             };
@@ -57,7 +57,7 @@ namespace Final___DigraphMatrixList
             PrintAdjencancyList(digraphMatrix, indexNames);
             DepthFirstSearch(indexNames[RedIndex], digraphMatrix, indexNames);
             DijkstraShortestPath(indexNames[RedIndex], indexNames[GreenIndex], digraphMatrix, weights, indexNames);
-            
+
         }
 
         public static void DijkstraShortestPath(string startColor, string endColor, bool[,] diagraphMatrix, int[,] matrixWeights, string[] indexNames)
@@ -68,53 +68,48 @@ namespace Final___DigraphMatrixList
             visited.Add(startColor);
 
 
-            Console.WriteLine(ShortestPathRecursive(startColor, endColor, diagraphMatrix, matrixWeights, indexNames, visited, lengths));
+            Console.WriteLine(ShortestPathRecursive(startColor, endColor, diagraphMatrix, matrixWeights, indexNames, visited));
 
 
         }
 
-        public static int ShortestPathRecursive(string startColor, string endColor, bool[,] diagraphMatrix, int[,] matrixWeights, string[] indexNames, List<string> visited, List<int> lengths)
+        public static int ShortestPathRecursive(string startColor, string endColor, bool[,] diagraphMatrix, int[,] matrixWeights, string[] indexNames, List<string> visited)
         {
-            bool startingRecursion = false;
 
-            if(visited.Count == 1)
+            //base case where we have reached our destination
+            if (startColor == endColor)
             {
-                startingRecursion = true;
+                return 0; 
             }
 
-            if (startColor != endColor)
-            {
+            int minLength = int.MaxValue; // Initialize to a large value
 
-                for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
+            //iterate through matrix
+            for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
+            {
+                //if we find a path and that color hasn't been reached already, continue 
+                if (diagraphMatrix[Array.IndexOf(indexNames, startColor), j] == true && !visited.Contains(indexNames[j]))
                 {
-                    if (diagraphMatrix[Array.IndexOf(indexNames, startColor), j] == true && !visited.Contains(indexNames[j]))
-                    {
-                        visited.Add(indexNames[j]);
-                        lengths.Add(matrixWeights[Array.IndexOf(indexNames, startColor), j]);
-                        lengths.Add(ShortestPathRecursive(startColor, endColor, diagraphMatrix, matrixWeights, indexNames, visited, lengths));
-                    }
+                    //add reached color to the visited array
+                    visited.Add(indexNames[j]);
+
+                    //add the weight for that path, and look for more paths by recalling this function (noting to change the startColor to the new color on the path)
+                    int currentLength = matrixWeights[Array.IndexOf(indexNames, startColor), j] +
+                                        ShortestPathRecursive(indexNames[j], endColor, diagraphMatrix, matrixWeights, indexNames, visited);
+
+                    //change minLength to whatever is smaller - its MaxValue or the current length. Recall that if any future path isn't found, a MaxValue will be set 
+                    //to minLength therefor an "impossible path" returns that highly absurd number to notify there was no usable path. 
+                    minLength = Math.Min(minLength, currentLength);
+
+                    // Backtrack by removing the last visited node
+                    visited.Remove(indexNames[j]);
                 }
             }
 
-            if (startingRecursion)
-            {
-                return lengths.Max();
-            }
-
-            else
-            {
-
-                int finalLength = 0;
-                foreach(int i in lengths)
-                {
-                    finalLength += i;
-                }
-                return finalLength;
-            }
-            
-
-
+            //return zero if minLength wasn't changed from its maxvalue; otherwise, return the minimum length found to the next point in the matrix
+            return minLength == int.MaxValue ? 0 : minLength;
         }
+
 
         public static void DepthFirstSearch(string color, bool[,] diagraphMatrix, string[] indexNames)
         {
@@ -126,8 +121,8 @@ namespace Final___DigraphMatrixList
         {
             string result = "";
 
-            
-                
+
+
             for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
             {
                 if (diagraphMatrix[Array.IndexOf(indexNames, color), j] == true && !visited.Contains(indexNames[j]))
@@ -148,13 +143,13 @@ namespace Final___DigraphMatrixList
             {
                 for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
                 {
-                    if (diagraphMatrix[i,j] == false)
+                    if (diagraphMatrix[i, j] == false)
                     {
                         result[i, j] = 0;
                     }
                     else
                     {
-                        result[i,j] = 1;
+                        result[i, j] = 1;
                     }
                 }
             }
@@ -162,12 +157,12 @@ namespace Final___DigraphMatrixList
             int counter = 0;
             int limit = diagraphMatrix.GetLength(0);
 
-            foreach(int i in result)
+            foreach (int i in result)
             {
                 Console.Write(" " + i + " ");
                 counter++;
 
-                if(counter == limit)
+                if (counter == limit)
                 {
                     counter = 0;
                     Console.Write("\n");
