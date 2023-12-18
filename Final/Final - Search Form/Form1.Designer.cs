@@ -42,14 +42,19 @@
             this.requesterGroupBox = new System.Windows.Forms.GroupBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.teamResultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.bgPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.searcherGroupBox.SuspendLayout();
             this.requesterGroupBox.SuspendLayout();
             this.teamResultsGroupBox.SuspendLayout();
+            this.bgPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gameTableLayoutPanel
             // 
             this.gameTableLayoutPanel.AutoScroll = true;
+            this.gameTableLayoutPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(27)))), ((int)(((byte)(51)))));
             this.gameTableLayoutPanel.ColumnCount = 2;
             this.gameTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.gameTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
@@ -63,7 +68,8 @@
             // 
             // searchGameTextBox
             // 
-            this.searchGameTextBox.Location = new System.Drawing.Point(18, 94);
+            this.searchGameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchGameTextBox.Location = new System.Drawing.Point(18, 97);
             this.searchGameTextBox.Name = "searchGameTextBox";
             this.searchGameTextBox.Size = new System.Drawing.Size(188, 20);
             this.searchGameTextBox.TabIndex = 1;
@@ -88,7 +94,7 @@
             // 
             // searchGameButton
             // 
-            this.searchGameButton.Location = new System.Drawing.Point(333, 94);
+            this.searchGameButton.Location = new System.Drawing.Point(246, 97);
             this.searchGameButton.Name = "searchGameButton";
             this.searchGameButton.Size = new System.Drawing.Size(75, 23);
             this.searchGameButton.TabIndex = 4;
@@ -98,6 +104,7 @@
             // teamLayoutPanel
             // 
             this.teamLayoutPanel.AutoScroll = true;
+            this.teamLayoutPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(27)))), ((int)(((byte)(51)))));
             this.teamLayoutPanel.ColumnCount = 3;
             this.teamLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.teamLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -119,11 +126,13 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(38)))), ((int)(((byte)(75)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(18, 19);
+            this.richTextBox1.ForeColor = System.Drawing.Color.White;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(309, 69);
+            this.richTextBox1.Size = new System.Drawing.Size(303, 69);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "Find the game you want to play by inserting its title in the search bar below, th" +
     "en hit search! Clicking on any result will show which teams are playing that gam" +
@@ -155,8 +164,8 @@
             // 
             // searcherGroupBox
             // 
+            this.searcherGroupBox.Controls.Add(this.bgPanel);
             this.searcherGroupBox.Controls.Add(this.gameTableLayoutPanel);
-            this.searcherGroupBox.Controls.Add(this.richTextBox1);
             this.searcherGroupBox.Controls.Add(this.searchGameTextBox);
             this.searcherGroupBox.Controls.Add(this.searchGameButton);
             this.searcherGroupBox.Location = new System.Drawing.Point(36, 28);
@@ -167,7 +176,7 @@
             // 
             // requesterGroupBox
             // 
-            this.requesterGroupBox.Controls.Add(this.richTextBox2);
+            this.requesterGroupBox.Controls.Add(this.panel1);
             this.requesterGroupBox.Controls.Add(this.requestGameTextBox);
             this.requesterGroupBox.Controls.Add(this.requestGameButton);
             this.requesterGroupBox.Location = new System.Drawing.Point(493, 332);
@@ -180,10 +189,10 @@
             // 
             this.richTextBox2.BackColor = System.Drawing.SystemColors.Control;
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Location = new System.Drawing.Point(11, 19);
+            this.richTextBox2.Location = new System.Drawing.Point(3, 3);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(238, 53);
+            this.richTextBox2.Size = new System.Drawing.Size(237, 53);
             this.richTextBox2.TabIndex = 7;
             this.richTextBox2.Text = "Is your game not available? Enter its game title here and we will review it to be" +
     " added to the database";
@@ -199,10 +208,29 @@
             this.teamResultsGroupBox.TabIndex = 11;
             this.teamResultsGroupBox.TabStop = false;
             // 
+            // bgPanel
+            // 
+            this.bgPanel.BackColor = System.Drawing.Color.OrangeRed;
+            this.bgPanel.Controls.Add(this.richTextBox1);
+            this.bgPanel.Location = new System.Drawing.Point(14, 10);
+            this.bgPanel.Name = "bgPanel";
+            this.bgPanel.Size = new System.Drawing.Size(309, 81);
+            this.bgPanel.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.OrangeRed;
+            this.panel1.Controls.Add(this.richTextBox2);
+            this.panel1.Location = new System.Drawing.Point(6, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(243, 60);
+            this.panel1.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(50)))), ((int)(((byte)(94)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.teamResultsGroupBox);
             this.Controls.Add(this.requesterGroupBox);
@@ -216,6 +244,8 @@
             this.requesterGroupBox.PerformLayout();
             this.teamResultsGroupBox.ResumeLayout(false);
             this.teamResultsGroupBox.PerformLayout();
+            this.bgPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,6 +267,8 @@
         private System.Windows.Forms.GroupBox requesterGroupBox;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.GroupBox teamResultsGroupBox;
+        private System.Windows.Forms.Panel bgPanel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
