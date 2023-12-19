@@ -8,7 +8,7 @@ using System.Threading.Tasks;
  * Purpose: Console virtual interpretation of a Digraph graph, complete with functionality for displaying information
  * about possible travel paths, weights, edges, and shortest path to a destination. As per IGME201's Final Test 
  */
-namespace Final___DigraphMatrixList
+namespace Final___DigraphMatrix
 {
     internal class Program
     {
