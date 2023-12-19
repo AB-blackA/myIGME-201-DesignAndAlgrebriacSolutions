@@ -4,10 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* Program: Final - DigraphMatrixList
+ * Purpose: Console virtual interpretation of a Digraph graph, complete with functionality for displaying information
+ * about possible travel paths, weights, edges, and shortest path to a destination. As per IGME201's Final Test 
+ */
 namespace Final___DigraphMatrixList
 {
     internal class Program
     {
+        //constants for color indexing to matrices
         private const int RedIndex = 0;
         private const int BlueIndex = 1;
         private const int GreyIndex = 2;
@@ -17,13 +22,19 @@ namespace Final___DigraphMatrixList
         private const int YellowIndex = 6;
         private const int GreenIndex = 7;
 
+        //unused constant that is used for our weight matrice; anything less than 0 represents there is no connection
         private const int WeightFloor = 0;
 
-
+        //index of strings. static to be used with methods outside of main
         private static string[] indexNames = { "red", "blue", "grey", "light blue", "orange", "purple", "yellow", "green" };
 
+        /* Method: Main
+         * Purpose: Run test data for final exam regarding Diagraph Matrices
+         */
         static void Main(string[] args)
         {
+
+            //create matrix based on specifications added in final exam. Indexed for your viewing pleasure
             bool[,] digraphMatrix = new bool[,]
             {
                            // red   blue  grey  light blue orange purple yellow green
@@ -53,6 +64,7 @@ namespace Final___DigraphMatrixList
 
             };
 
+            //call functions to output to console various tasks done on the data using the matrices
             PrintAdjencyMatrix(digraphMatrix, indexNames);
             PrintAdjencancyList(digraphMatrix, indexNames);
             DepthFirstSearch(indexNames[RedIndex], digraphMatrix, indexNames);
@@ -60,6 +72,9 @@ namespace Final___DigraphMatrixList
 
         }
 
+        /* Method: DijkstraShortestPath
+         * Purpose: Finds the shortest path from one vertice to another. Mostly relies on a recursive function to do the work
+         */
         public static void DijkstraShortestPath(string startColor, string endColor, bool[,] diagraphMatrix, int[,] matrixWeights, string[] indexNames)
         {
             List<int> lengths = new List<int>();
@@ -67,12 +82,14 @@ namespace Final___DigraphMatrixList
 
             visited.Add(startColor);
 
-
+            //call recursive function
             Console.WriteLine(ShortestPathRecursive(startColor, endColor, diagraphMatrix, matrixWeights, indexNames, visited));
-
 
         }
 
+        /* Method: ShortestPathRecursive
+         * Purpose: Recursively finds the shortest path based on starting color, ending color, the matrices, color names, and list of colors already visited by this current path
+         */
         public static int ShortestPathRecursive(string startColor, string endColor, bool[,] diagraphMatrix, int[,] matrixWeights, string[] indexNames, List<string> visited)
         {
 
@@ -83,7 +100,8 @@ namespace Final___DigraphMatrixList
                 return 0; 
             }
 
-            int minLength = int.MaxValue; // Initialize to a large value
+            // Initialize to a large value. Such a large value is WAY outside the scope of data, so we can use this to check for a dead end later
+            int minLength = int.MaxValue; 
 
             //iterate through matrix
             for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
@@ -102,7 +120,7 @@ namespace Final___DigraphMatrixList
                     //to minLength therefor an "impossible path" returns that highly absurd number to notify there was no usable path. 
                     minLength = Math.Min(minLength, currentLength);
 
-                    // Backtrack by removing the last visited node
+                    //backtrack by removing the last visited node
                     visited.Remove(indexNames[j]);
                 }
             }
@@ -111,22 +129,30 @@ namespace Final___DigraphMatrixList
             return minLength == int.MaxValue ? 0 : minLength;
         }
 
-
+        /* Method: DepthFirstSearch
+         * Purpose: Calls the function DFSRecursive which recursively finds a Depth First Search of a vertice
+         */
         public static void DepthFirstSearch(string color, bool[,] diagraphMatrix, string[] indexNames)
         {
 
             Console.Write(DFSRecursive(new List<string>(), diagraphMatrix, indexNames, indexNames[RedIndex]));
         }
 
+        /* Method: DFSRecursive
+         * Purpose: Recusrively does a Depth First Search of a vertice by keeping track of vertices already visited 
+         */
         public static string DFSRecursive(List<string> visited, bool[,] diagraphMatrix, string[] indexNames, string color)
         {
+
+            //what will be returned eventually is an addition of colors to this string, as long as we can reach those colors
             string result = "";
 
-
+            //loop through graph and determine if there's an edge (and that edge doesn't go to a color already visited)
             for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
             {
                 if (diagraphMatrix[Array.IndexOf(indexNames, color), j] == true && !visited.Contains(indexNames[j]))
                 {
+                    //if its a new color, add it to the visited list and look for more paths to unique colors 
                     visited.Add(indexNames[j]);
                     result += (indexNames[j] + " " + DFSRecursive(visited, diagraphMatrix, indexNames, indexNames[j]));
                 }
@@ -135,10 +161,15 @@ namespace Final___DigraphMatrixList
             return result;
         }
 
+        /* Method: PrintAdjencyMatrix
+         * Purpose: Prints a visual representation of the available edges from the diagraphMatrix to the console
+         */
         public static void PrintAdjencyMatrix(bool[,] diagraphMatrix, string[] indexNames)
         {
+            //clone the size of the diagraphMatrix into an int 2D matrix
             int[,] result = new int[diagraphMatrix.GetLength(0), diagraphMatrix.GetLength(1)];
 
+            //if there is an edge, add a 1 to result to indicate so. otherwise, add 0
             for (int i = 0; i < diagraphMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < diagraphMatrix.GetLength(1); j++)
@@ -154,6 +185,7 @@ namespace Final___DigraphMatrixList
                 }
             }
 
+            //print to console the new result matrix
             int counter = 0;
             int limit = diagraphMatrix.GetLength(0);
 
@@ -170,13 +202,20 @@ namespace Final___DigraphMatrixList
             }
         }
 
+        /* Method: PrintAdjencancyList
+         * Purpose: Print which Vertices are connected to one another by looking through the diagraphMatrix and printint the color
+         * of any vertice that has an edge to another
+         */
         public static void PrintAdjencancyList(bool[,] digraphMatrix, string[] indexNames)
         {
+            //string to be printed
             string listResult;
 
+            //loop through columns of diagraphMatrix
             for (int i = 0; i < digraphMatrix.GetLength(0); i++)
             {
 
+                //for each color, start its output statement
                 if (i == RedIndex)
                 {
                     listResult = indexNames[RedIndex] + " ->";
@@ -210,6 +249,7 @@ namespace Final___DigraphMatrixList
                     listResult = indexNames[GreenIndex] + " ->";
                 }
 
+                //then loop through each row of the diagraphMatrix, looking for any true values. If so, add that color onto its result statement
                 for (int j = 0; j < digraphMatrix.GetLength(1); j++)
                 {
 
