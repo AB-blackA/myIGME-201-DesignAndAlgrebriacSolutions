@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Final - Stack")]
+[assembly: AssemblyTitle("Final - JsonGame")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Final - Stack")]
+[assembly: AssemblyProduct("Final - JsonGame")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1ac7cbf7-0f7d-447a-8640-ad12d3d28c28")]
+[assembly: Guid("c53f51ce-18f8-4f50-8c51-d8d4f0f9b761")]
 
 // Version information for an assembly consists of the following four values:
 //
