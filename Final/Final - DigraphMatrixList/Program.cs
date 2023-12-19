@@ -79,6 +79,7 @@ namespace Final___DigraphMatrixList
             //base case where we have reached our destination
             if (startColor == endColor)
             {
+                //no more edges; return length of zero
                 return 0; 
             }
 
@@ -106,7 +107,7 @@ namespace Final___DigraphMatrixList
                 }
             }
 
-            //return zero if minLength wasn't changed from its maxvalue; otherwise, return the minimum length found to the next point in the matrix
+            //return zero if minLength wasn't changed from its maxvalue; otherwise, return the minimum length found to complete the path
             return minLength == int.MaxValue ? 0 : minLength;
         }
 
@@ -120,7 +121,6 @@ namespace Final___DigraphMatrixList
         public static string DFSRecursive(List<string> visited, bool[,] diagraphMatrix, string[] indexNames, string color)
         {
             string result = "";
-
 
 
             for (int j = 0; j < diagraphMatrix.GetLength(1); j++)

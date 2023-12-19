@@ -4,10 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* Author: Andrew Black since 12/18/23
+ * Purpose: program to hold class objects for "imposter" Stack's and Queues for IGME201 Final Exam
+ * Limitations: none
+ */
 namespace Final___Stack
 {
+
     internal class Program
     {
+
+        /*Method: Main
+         *Purpose: do various testing on class objects; all code is leftover from testing and none are important
+         */
         static void Main(string[] args)
         {
 
@@ -27,10 +36,16 @@ namespace Final___Stack
         }
     }
 
+    /*Class: MyStack
+     *Purpose: Imitate a Stack object (for integers) by fiddling with a List<int> object. Retains LIFO
+     */
     public class MyStack
     {
         private List<int> list;
 
+        /* Constructor: MyStack
+         * Default argument creates a list.
+         */
         public MyStack()
         {
 
@@ -38,13 +53,18 @@ namespace Final___Stack
 
         }
 
+        /* Method: Push
+         * Purpose: Imitation of Push. Adds int to end of List
+         */
         public void Push(int i)
         {
             this.list.Add(i);
 
-            
         }
 
+        /* Method: Pop
+         * Purpose: Imitation of Pop. Remove and return the last int added to List
+         */
         public int Pop()
         {
             int popVal = this.list[this.list.Count - 1];
@@ -52,6 +72,9 @@ namespace Final___Stack
             return popVal;
         }
 
+        /* Method: Peek
+         * Purpose: Imitation of Peek. Return the last int added to List, but don't remove it
+         */
         public int Peek()
         {
             return this.list[this.list.Count - 1];
@@ -59,18 +82,27 @@ namespace Final___Stack
 
     }
 
+    /* Class: MyQueue
+     * Purpose: Imitation of a Queue object (for integers) by fiddling with a List<Int> object. Retains FIFO
+     */
     public class MyQueue
     {
         private List<int> list;
 
+        /* Constructor: MyQueue
+         * Default argument creates a list
+         */
         public MyQueue()
         {
             this.list = new List<int>();
         }
 
-
+        /* Method: Enqueue
+         * Purpose: Imitation of Enqueue. Adds an integer to the very beginning of the Queue
+         */
         public void Enqueue(int i)
         {
+            // add int to start by making a new list, adding passed int to it, then copying over old list
             List<int> copy = new List<int>();
             copy.Add(i);
 
@@ -92,6 +124,9 @@ namespace Final___Stack
 
         }
 
+        /* Method: Dequeue
+         * Purpose: Imitation of Dequeue. Removes the first added int
+         */
         public int Dequeue()
         {
             int deqVal = this.list[0];
@@ -99,6 +134,9 @@ namespace Final___Stack
             return deqVal;
         }
 
+        /* Method: Peek
+         * Purpose: Imitation of Peek. Return the first int added to List, but don't remove it
+         */
         public int Peek()
         {
             return this.list[0];
